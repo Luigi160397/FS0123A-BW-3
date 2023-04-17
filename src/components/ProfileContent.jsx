@@ -1,7 +1,9 @@
+import MainCard from "./MainCard";
+
 const ProfileContent = () => {
   return (
     <div>
-      <h1>Profile content</h1>
+      <MainCard />
     </div>
   );
 };
