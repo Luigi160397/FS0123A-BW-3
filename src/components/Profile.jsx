@@ -4,15 +4,17 @@ import ProfileFooter from "./ProfileFooter";
 
 const Profile = () => {
   return (
-    <Container className="px-5">
-      <Row>
-        <Col md={8}>
-          <ProfileContent />
-        </Col>
-        <Col md={4}></Col>
-      </Row>
+    <>
+      <Container className="px-5">
+        <Row>
+          <Col md={8}>
+            <ProfileContent />
+          </Col>
+          <Col md={4}></Col>
+        </Row>
+      </Container>
       <ProfileFooter />
-    </Container>
+    </>
   );
 };
 
