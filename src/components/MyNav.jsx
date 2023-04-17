@@ -30,7 +30,7 @@ const MyNav = () => {
         </div>
 
         <Nav className="d-flex flex-row gap-3">
-          <Link to="/" className="nav-link d-flex flex-column justify-content-center align-items-center" to="/">
+          <Link to="/" className="nav-link d-flex flex-column justify-content-center align-items-center">
             <span>
               <img width={30} height={30} src={home} alt="home" />
             </span>
