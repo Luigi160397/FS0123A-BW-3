@@ -17,17 +17,19 @@ const MyNav = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home">
-          <img src={logo} alt="logo" width={50} height={50} />
-        </Navbar.Brand>
-        <Form className="d-flex position-relative">
-          <Form.Control type="search" placeholder="Search" className="me-2 ps-5 " aria-label="Search" />
-          <FaSearch style={{ left: "10px", top: "8px" }} className="position-absolute fs-5" />
-        </Form>
+    <Navbar bg="dark" variant="dark" expand="lg">
+      <Container className="px-5">
+        <div className="d-flex align-items-center">
+          <Navbar.Brand href="#home">
+            <img src={logo} alt="logo" width={50} height={50} />
+          </Navbar.Brand>
+          <Form className="d-flex position-relative me-5">
+            <Form.Control type="search" placeholder="Cerca" className="me-2 ps-5 pe-5 " aria-label="Search" />
+            <FaSearch style={{ left: "10px", top: "8px" }} className="position-absolute fs-5" />
+          </Form>
+        </div>
 
-        <Nav className="me-auto">
+        <Nav className="d-flex flex-row gap-3">
           <Link className="nav-link d-flex flex-column justify-content-center align-items-center" to="/">
             <span>
               <img width={30} height={30} src={home} alt="home" />
@@ -61,7 +63,7 @@ const MyNav = () => {
           <Dropdown>
             <div className="d-flex flex-column justify-content-center align-items-center p-2">
               <img className="rounded-circle" src={avatar} alt="avatar" width={30} height={30} />
-              <Dropdown.Toggle className="bg-transparent border-0 text-dark p-0" id="dropdown-basic">
+              <Dropdown.Toggle className="bg-transparent border-0 p-0" style={{ fontSize: "12px" }} id="dropdown-basic">
                 Tu
               </Dropdown.Toggle>
             </div>
@@ -73,11 +75,15 @@ const MyNav = () => {
             </Dropdown.Menu>
           </Dropdown>
 
-          <div className="vr"></div>
+          <div className="vr text-white d-none d-md-block"></div>
 
           <div className="d-flex flex-column justify-content-center align-items-center p-2">
             <img width={30} height={30} src={aziende} alt="aziende" />
-            <Dropdown.Toggle onClick={handleShow} className="me-2 bg-transparent border-0 text-dark p-0">
+            <Dropdown.Toggle
+              onClick={handleShow}
+              style={{ fontSize: "12px" }}
+              className="me-2 bg-transparent border-0 text-light p-0"
+            >
               Per le aziende
             </Dropdown.Toggle>
           </div>
