@@ -1,5 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import ProfileContent from "./ProfileContent";
+import ProfileFooter from "./ProfileFooter";
 
 const Profile = () => {
   return (
@@ -10,6 +11,7 @@ const Profile = () => {
         </Col>
         <Col md={4}></Col>
       </Row>
+      <ProfileFooter />
     </Container>
   );
 };
