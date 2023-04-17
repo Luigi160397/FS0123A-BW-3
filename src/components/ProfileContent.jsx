@@ -7,8 +7,8 @@ const ProfileContent = () => {
   return (
     <div>
       <MainCard />
-      <AnalisiCard/>
-      <RisorseCard/>
+      <AnalisiCard />
+      <RisorseCard />
       <BioCard />
     </div>
   );

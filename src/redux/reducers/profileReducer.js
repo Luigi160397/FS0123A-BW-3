@@ -1,7 +1,8 @@
-import { GET_PROFILE } from "../actions";
+import { GET_PROFILE, GET_PROFILES } from "../actions";
 
 const initialState = {
-  content: null
+  content: null,
+  profiles: []
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         content: action.payload
+      };
+    case GET_PROFILES:
+      return {
+        ...state,
+        profiles: action.payload
       };
     default:
       return state;

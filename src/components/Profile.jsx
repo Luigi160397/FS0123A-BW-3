@@ -1,6 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 import ProfileContent from "./ProfileContent";
 import ProfileFooter from "./ProfileFooter";
+import Sidebar from "./Sidebar";
 
 const Profile = () => {
   return (
@@ -10,7 +11,9 @@ const Profile = () => {
           <Col md={8}>
             <ProfileContent />
           </Col>
-          <Col md={4}></Col>
+          <Col md={4}>
+            <Sidebar />
+          </Col>
         </Row>
       </Container>
       <ProfileFooter />
