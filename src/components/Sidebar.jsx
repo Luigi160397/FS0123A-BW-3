@@ -21,7 +21,7 @@ const Sidebar = () => {
     //   <Row>
     // <Col style={{ maxWidth: "300px" }}>
     <>
-      <div className=" mt-4 mb-2 p-3 shadow-sm rounded  bg-dark text-white" style={{ color: "#00000099" }}>
+      <div className=" mt-3 mb-2 p-3 shadow-sm rounded  bg-dark text-white" style={{ color: "#00000099" }}>
         <div className="d-flex justify-content-between align-items-baseline">
           <p className="fw-bold me-3">Modifica il profilo pubblico e l'URL</p>
           <FaQuestionCircle className="flex-shrink-0" style={{ width: "20px" }} />
@@ -43,7 +43,7 @@ const Sidebar = () => {
 
         <>
           {profiles.map((profile) => (
-            <div key={profile._id} className="d-flex border-bottom">
+            <div key={profile._id} className="d-flex border-bottom pt-3">
               <img
                 className="me-3 rounded-circle"
                 src={profile.image}

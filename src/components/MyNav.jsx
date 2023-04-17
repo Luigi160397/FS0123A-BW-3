@@ -20,9 +20,9 @@ const MyNav = () => {
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container className="px-5">
         <div className="d-flex align-items-center">
-          <Navbar.Brand href="#home">
+          <Link className="navbar-brand" to="/">
             <img src={logo} alt="logo" width={50} height={50} />
-          </Navbar.Brand>
+          </Link>
           <Form className="d-flex position-relative me-5">
             <Form.Control type="search" placeholder="Cerca" className="me-2 ps-5 pe-5 " aria-label="Search" />
             <FaSearch style={{ left: "10px", top: "8px" }} className="position-absolute fs-5" />
@@ -30,7 +30,7 @@ const MyNav = () => {
         </div>
 
         <Nav className="d-flex flex-row gap-3">
-          <Link className="nav-link d-flex flex-column justify-content-center align-items-center" to="/">
+          <Link to="/" className="nav-link d-flex flex-column justify-content-center align-items-center" to="/">
             <span>
               <img width={30} height={30} src={home} alt="home" />
             </span>
@@ -69,7 +69,9 @@ const MyNav = () => {
             </div>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Link className="dropdown-item" to="/profile">
+                Profile
+              </Link>
               <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
               <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
             </Dropdown.Menu>
