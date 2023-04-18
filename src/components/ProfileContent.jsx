@@ -2,6 +2,7 @@ import MainCard from "./MainCard";
 import RisorseCard from "./RisorseCard";
 import AnalisiCard from "./AnalisiCard";
 import BioCard from "./BioCard";
+import Experiences from "./Experiences";
 
 const ProfileContent = () => {
   return (
@@ -10,6 +11,7 @@ const ProfileContent = () => {
       <AnalisiCard />
       <RisorseCard />
       <BioCard />
+      <Experiences />
     </div>
   );
 };
