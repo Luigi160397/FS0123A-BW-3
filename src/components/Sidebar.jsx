@@ -1,5 +1,5 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import { useEffect } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import banner from "../assets/banner-small.png";
 import avatar1 from "../assets/avatar1.png";
@@ -12,9 +12,10 @@ const Sidebar = () => {
 
   useEffect(() => {
     dispatch(getProfilesAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const profiles = useSelector((state) => state.profile.profiles.slice(0, 5));
+  const profiles = useSelector(state => state.profile.profiles);
 
   return (
     // <Container>
@@ -42,11 +43,11 @@ const Sidebar = () => {
         </h3>
 
         <>
-          {profiles.map((profile) => (
+          {profiles.slice(0, 5).map(profile => (
             <div key={profile._id} className="d-flex border-bottom pt-3">
               <img
                 className="me-3 rounded-circle"
-                src={profile.image}
+                src={profile.image ? profile.image : avatar1}
                 alt=""
                 style={{ width: "48px", height: "48px" }}
               />
