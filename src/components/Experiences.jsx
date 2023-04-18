@@ -22,20 +22,20 @@ const Experiences = () => {
   return (
     <Card className="bg-dark text-white mb-3 position-relative">
       <Button
-        style={{ right: "50px", top: "0px" }}
+        style={{ right: "0px", top: "0px" }}
         variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
       >
         <FaPlus className="text-white fs-5" />
       </Button>
-      <Button
-        style={{ right: "0px", top: "0px" }}
-        variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
-      >
-        <FaPen className="text-white fs-5" />
-      </Button>
-      <Card.Title className="mt-3 ms-3">Esperienza</Card.Title>
+      <Card.Title className="mt-3 ms-">Esperienza</Card.Title>
       {experiencies.map(experience => (
-        <Card.Body key={experience._id}>
+        <Card.Body key={experience._id} className="position-relative">
+          <Button
+            style={{ right: "0px", top: "0px" }}
+            variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
+          >
+            <FaPen className="text-white fs-5" />
+          </Button>
           <Row>
             <Col className="d-flex gap-2">
               <div>
