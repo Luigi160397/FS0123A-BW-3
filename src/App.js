@@ -5,7 +5,8 @@ import MyNav from "./components/MyNav";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "./components/Profile";
 import Experiences from "./components/Experiences";
-
+import { Col, Container, Row } from "react-bootstrap";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
@@ -14,7 +15,21 @@ function App() {
         <MyNav />
         <Routes>
           <Route path="/profile" element={<Profile />} />
-          <Route path="/experiences" element={<Experiences />} />
+          <Route
+            path="/experiences"
+            element={
+              <Container className="px-5 py-3">
+                <Row>
+                  <Col md={8}>
+                    <Experiences />
+                  </Col>
+                  <Col md={4}>
+                    <Sidebar />
+                  </Col>
+                </Row>
+              </Container>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

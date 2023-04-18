@@ -18,9 +18,6 @@ const Sidebar = () => {
   const profiles = useSelector(state => state.profile.profiles);
 
   return (
-    // <Container>
-    //   <Row>
-    // <Col style={{ maxWidth: "300px" }}>
     <>
       <div className=" mt-3 mb-2 p-3 shadow-sm rounded  bg-dark text-white" style={{ color: "#00000099" }}>
         <div className="d-flex justify-content-between align-items-baseline">

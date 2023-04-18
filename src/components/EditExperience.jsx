@@ -10,13 +10,13 @@ const EditExperience = ({ showEdit, handleCloseEdit, esperienza }) => {
     _id: esperienza._id,
     role: esperienza.role,
     company: esperienza.company,
-    startDate: esperienza.startDate,
-    endDate: esperienza.endDate,
+    startDate: new Date(esperienza.startDate).toISOString().slice(0, 10),
+    endDate: new Date(esperienza.endDate).toISOString().slice(0, 10),
     description: esperienza.description,
     area: esperienza.area
   });
 
-  const editExp = async (e) => {
+  const editExp = async e => {
     e.preventDefault();
     const token = process.env.REACT_APP_API_KEY;
     try {
@@ -76,7 +76,7 @@ const EditExperience = ({ showEdit, handleCloseEdit, esperienza }) => {
               autoFocus
               required
               value={experience.role}
-              onChange={(e) => setExperience({ ...experience, role: e.target.value })}
+              onChange={e => setExperience({ ...experience, role: e.target.value })}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="company">
@@ -87,7 +87,7 @@ const EditExperience = ({ showEdit, handleCloseEdit, esperienza }) => {
               autoFocus
               required
               value={experience.company}
-              onChange={(e) => setExperience({ ...experience, company: e.target.value })}
+              onChange={e => setExperience({ ...experience, company: e.target.value })}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="area">
@@ -98,7 +98,7 @@ const EditExperience = ({ showEdit, handleCloseEdit, esperienza }) => {
               autoFocus
               required
               value={experience.area}
-              onChange={(e) => setExperience({ ...experience, area: e.target.value })}
+              onChange={e => setExperience({ ...experience, area: e.target.value })}
             />
           </Form.Group>
           <div className="d-flex gap-3">
@@ -109,7 +109,7 @@ const EditExperience = ({ showEdit, handleCloseEdit, esperienza }) => {
                 autoFocus
                 required
                 value={experience.startDate}
-                onChange={(e) => setExperience({ ...experience, startDate: e.target.value })}
+                onChange={e => setExperience({ ...experience, startDate: e.target.value })}
               />
             </Form.Group>
             <Form.Group className="mb-3" style={{ flexBasis: "50%" }} controlId="endDate">
@@ -119,7 +119,7 @@ const EditExperience = ({ showEdit, handleCloseEdit, esperienza }) => {
                 autoFocus
                 required
                 value={experience.endDate}
-                onChange={(e) => setExperience({ ...experience, endDate: e.target.value })}
+                onChange={e => setExperience({ ...experience, endDate: e.target.value })}
               />
             </Form.Group>
           </div>
@@ -131,7 +131,7 @@ const EditExperience = ({ showEdit, handleCloseEdit, esperienza }) => {
               rows={3}
               required
               value={experience.description}
-              onChange={(e) => setExperience({ ...experience, description: e.target.value })}
+              onChange={e => setExperience({ ...experience, description: e.target.value })}
             />
           </Form.Group>
           <Button className="me-3" variant="primary" type="submit">
