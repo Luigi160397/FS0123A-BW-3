@@ -1,12 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 
 import { FaPen, FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { getExperiencesAction } from "../redux/actions";
+import AddExperience from "./AddExperience";
 
 const Experiences = () => {
   const content = useSelector(state => state.profile.content);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const dispatch = useDispatch();
 
@@ -21,9 +26,11 @@ const Experiences = () => {
 
   return (
     <Card className="bg-dark text-white mb-3 position-relative">
+      <AddExperience show={show} handleClose={handleClose} />
       <Button
         style={{ right: "0px", top: "0px" }}
         variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
+        onClick={handleShow}
       >
         <FaPlus className="text-white fs-5" />
       </Button>
