@@ -27,7 +27,7 @@ const Experiences = () => {
       >
         <FaPlus className="text-white fs-5" />
       </Button>
-      <Card.Title className="mt-3 ms-">Esperienza</Card.Title>
+      <Card.Title className="mt-3 ms-3">Esperienza</Card.Title>
       {experiencies.map(experience => (
         <Card.Body key={experience._id} className="position-relative">
           <Button
