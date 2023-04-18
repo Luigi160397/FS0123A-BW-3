@@ -6,8 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getExperiencesAction } from "../redux/actions";
 import AddExperience from "./AddExperience";
 import EditExperience from "./EditExperience";
+import { Link, useLocation } from "react-router-dom";
 
 const Experiences = () => {
+  const location = useLocation();
+
   const content = useSelector((state) => state.profile.content);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -39,7 +42,7 @@ const Experiences = () => {
         <FaPlus className="text-white fs-5" />
       </Button>
       <Card.Title className="mt-3 ms-3">Esperienza</Card.Title>
-      {experiencies.map((experience) => (
+      {experiencies.slice(0, 3).map((experience) => (
         <Card.Body key={experience._id} className="position-relative">
           <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
           <EditExperience esperienza={experience} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
@@ -78,6 +81,9 @@ const Experiences = () => {
           </Row>
         </Card.Body>
       ))}
+      <Card.Footer>
+        <Link to="/experiences" className="card-text">Visualizza altre</Link>
+      </Card.Footer>
     </Card>
   );
 };
