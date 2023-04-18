@@ -33,9 +33,9 @@ const Experiences = () => {
       >
         <FaPen className="text-white fs-5" />
       </Button>
+      <Card.Title className="mt-3 ms-3">Esperienza</Card.Title>
       {experiencies.map(experience => (
         <Card.Body key={experience._id}>
-          <Card.Title>Esperienza</Card.Title>
           <Row>
             <Col className="d-flex gap-2">
               <div>
