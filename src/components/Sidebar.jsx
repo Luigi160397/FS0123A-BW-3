@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import banner from "../assets/banner-small.png";
 import avatar1 from "../assets/avatar1.png";
@@ -9,13 +9,19 @@ import { getProfilesAction } from "../redux/actions";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
+  const [showMore, setShowMore] = useState(false);
+  const profiles = useSelector(state => state.profile.profiles);
+
+  const toggleShowMore = () => {
+    setShowMore(!showMore);
+  };
+
+  const displayedProfiles = showMore ? profiles.slice(0, 10) : profiles.slice(0, 5);
 
   useEffect(() => {
     dispatch(getProfilesAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const profiles = useSelector(state => state.profile.profiles);
 
   return (
     <>
@@ -40,7 +46,7 @@ const Sidebar = () => {
         </h3>
 
         <>
-          {profiles.slice(0, 5).map(profile => (
+          {displayedProfiles.map(profile => (
             <div key={profile._id} className="d-flex border-bottom pt-3">
               <img
                 className="me-3 rounded-circle"
@@ -73,8 +79,12 @@ const Sidebar = () => {
           ))}
         </>
 
-        <div className="d-flex justify-content-center mt-2 fw-bold" style={{ fontSize: "16px" }}>
-          Visualizza altro
+        <div
+          className="d-flex justify-content-center mt-2 fw-bold"
+          style={{ fontSize: "16px", cursor: "pointer" }}
+          onClick={toggleShowMore}
+        >
+          {showMore ? "Visualizza meno" : "Visualizza altro"}
         </div>
       </div>
     </>
