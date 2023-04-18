@@ -26,7 +26,6 @@ const Experiences = () => {
 
   return (
     <Card className="bg-dark text-white mb-3 position-relative">
-      <AddExperience show={show} handleClose={handleClose} />
       <Button
         style={{ right: "0px", top: "0px" }}
         variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
@@ -37,6 +36,7 @@ const Experiences = () => {
       <Card.Title className="mt-3 ms-3">Esperienza</Card.Title>
       {experiencies.map(experience => (
         <Card.Body key={experience._id} className="position-relative">
+          <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
           <Button
             style={{ right: "0px", top: "0px" }}
             variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"

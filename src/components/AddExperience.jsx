@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getExperiencesAction } from "../redux/actions";
 
-const AddExperience = ({ show, handleClose }) => {
-  const content = useSelector(state => state.profile.content);
+const AddExperience = ({ show, handleClose, esperienza }) => {
+  const idUser = esperienza.user;
   const dispatch = useDispatch();
   const [experience, setExperience] = useState({
     role: "",
@@ -18,7 +18,7 @@ const AddExperience = ({ show, handleClose }) => {
     e.preventDefault();
     const token = process.env.REACT_APP_API_KEY;
     try {
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${content._id}/experiences`, {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${idUser}/experiences`, {
         method: "POST",
         body: JSON.stringify(experience),
         headers: {
@@ -27,7 +27,7 @@ const AddExperience = ({ show, handleClose }) => {
         }
       });
       if (response.ok) {
-        dispatch(getExperiencesAction(content._id));
+        dispatch(getExperiencesAction(idUser));
         setExperience({
           role: "",
           company: "",
