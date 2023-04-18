@@ -3,41 +3,58 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { getExperiencesAction } from "../redux/actions";
 
-const AddExperience = ({ show, handleClose, esperienza }) => {
+const EditExperience = ({ showEdit, handleCloseEdit, esperienza }) => {
   const idUser = esperienza.user;
   const dispatch = useDispatch();
   const [experience, setExperience] = useState({
-    role: "",
-    company: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-    area: ""
+    _id: esperienza._id,
+    role: esperienza.role,
+    company: esperienza.company,
+    startDate: esperienza.startDate,
+    endDate: esperienza.endDate,
+    description: esperienza.description,
+    area: esperienza.area
   });
 
-  const addExp = async (e) => {
+  const editExp = async (e) => {
     e.preventDefault();
     const token = process.env.REACT_APP_API_KEY;
     try {
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${idUser}/experiences`, {
-        method: "POST",
-        body: JSON.stringify(experience),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${idUser}/experiences/${esperienza._id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(experience),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token
+          }
         }
-      });
+      );
       if (response.ok) {
         dispatch(getExperiencesAction(idUser));
-        setExperience({
-          role: "",
-          company: "",
-          startDate: "",
-          endDate: "",
-          description: "",
-          area: ""
-        });
-        handleClose();
+        handleCloseEdit();
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const handleDelete = async () => {
+    const token = process.env.REACT_APP_API_KEY;
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${idUser}/experiences/${esperienza._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: token
+          }
+        }
+      );
+      if (response.ok) {
+        dispatch(getExperiencesAction(idUser));
+        handleCloseEdit();
       }
     } catch (error) {
       alert(error);
@@ -45,12 +62,12 @@ const AddExperience = ({ show, handleClose, esperienza }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose} className="text-white">
+    <Modal show={showEdit} onHide={handleCloseEdit} className="text-white">
       <Modal.Header className="bg-dark text-white" closeButton>
         <Modal.Title>Aggiungi esperienza</Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-dark">
-        <Form onSubmit={addExp}>
+        <Form onSubmit={editExp}>
           <Form.Group className="mb-3" controlId="role">
             <Form.Label>Qualifica</Form.Label>
             <Form.Control
@@ -117,12 +134,15 @@ const AddExperience = ({ show, handleClose, esperienza }) => {
               onChange={(e) => setExperience({ ...experience, description: e.target.value })}
             />
           </Form.Group>
-          <Button className="me-auto" variant="primary" type="submit">
+          <Button className="me-3" variant="primary" type="submit">
             Salva
+          </Button>
+          <Button variant="danger" type="button" onClick={handleDelete}>
+            Elimina
           </Button>
         </Form>
       </Modal.Body>
     </Modal>
   );
 };
-export default AddExperience;
+export default EditExperience;

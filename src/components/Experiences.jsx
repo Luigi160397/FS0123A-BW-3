@@ -5,13 +5,18 @@ import { FaPen, FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { getExperiencesAction } from "../redux/actions";
 import AddExperience from "./AddExperience";
+import EditExperience from "./EditExperience";
 
 const Experiences = () => {
-  const content = useSelector(state => state.profile.content);
+  const content = useSelector((state) => state.profile.content);
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [showEdit, setShowEdit] = useState(false);
+
+  const handleCloseEdit = () => setShowEdit(false);
+  const handleShowEdit = () => setShowEdit(true);
 
   const dispatch = useDispatch();
 
@@ -22,7 +27,7 @@ const Experiences = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
 
-  const experiencies = useSelector(state => state.profile.experiencies);
+  const experiencies = useSelector((state) => state.profile.experiencies);
 
   return (
     <Card className="bg-dark text-white mb-3 position-relative">
@@ -34,12 +39,14 @@ const Experiences = () => {
         <FaPlus className="text-white fs-5" />
       </Button>
       <Card.Title className="mt-3 ms-3">Esperienza</Card.Title>
-      {experiencies.map(experience => (
+      {experiencies.map((experience) => (
         <Card.Body key={experience._id} className="position-relative">
           <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
+          <EditExperience esperienza={experience} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
           <Button
             style={{ right: "0px", top: "20px" }}
             variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
+            onClick={handleShowEdit}
           >
             <FaPen className="text-white fs-5" />
           </Button>
