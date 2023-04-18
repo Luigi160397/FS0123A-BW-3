@@ -38,7 +38,7 @@ const Experiences = () => {
         <Card.Body key={experience._id} className="position-relative">
           <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
           <Button
-            style={{ right: "0px", top: "0px" }}
+            style={{ right: "0px", top: "20px" }}
             variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
           >
             <FaPen className="text-white fs-5" />
