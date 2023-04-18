@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getExperiencesAction } from "../redux/actions";
 
 const AddExperience = ({ show, handleClose }) => {
   const content = useSelector(state => state.profile.content);
+  const dispatch = useDispatch();
   const [experience, setExperience] = useState({
     role: "",
     company: "",
@@ -25,6 +27,7 @@ const AddExperience = ({ show, handleClose }) => {
         }
       });
       if (response.ok) {
+        dispatch(getExperiencesAction(content._id));
         setExperience({
           role: "",
           company: "",
@@ -33,6 +36,7 @@ const AddExperience = ({ show, handleClose }) => {
           description: "",
           area: ""
         });
+        handleClose();
       }
     } catch (error) {
       alert(error);
