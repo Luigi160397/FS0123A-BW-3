@@ -52,7 +52,17 @@ const Experiences = () => {
                 <Card.Title>{experience.role}</Card.Title>
                 <Card.Subtitle>{experience.company}</Card.Subtitle>
                 <Card.Text className="text-muted mb-0">
-                  {experience.startDate} - {experience.endDate}
+                  {new Date(experience.startDate).toLocaleDateString("it-IT", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                  })}{" "}
+                  -{" "}
+                  {new Date(experience.endDate).toLocaleDateString("it-IT", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                  })}
                 </Card.Text>
                 <Card.Text className="text-muted">{experience.area}</Card.Text>
                 <Card.Text>{experience.description}</Card.Text>
