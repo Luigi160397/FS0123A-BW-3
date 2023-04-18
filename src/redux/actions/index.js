@@ -1,7 +1,6 @@
 export const GET_PROFILE = "GET_PROFILE";
 export const GET_PROFILES = "GET_PROFILES";
 
-
 export const getProfileAction = () => {
   const url = "https://striveschool-api.herokuapp.com/api/profile/me";
   const token = process.env.REACT_APP_API_KEY;
@@ -23,7 +22,6 @@ export const getProfileAction = () => {
   };
 };
 
-
 export const getProfilesAction = () => {
   const url = "https://striveschool-api.herokuapp.com/api/profile/";
   const token = process.env.REACT_APP_API_KEY;
@@ -36,7 +34,7 @@ export const getProfilesAction = () => {
       });
       if (resp.ok) {
         let data = await resp.json();
-
+        data.sort(() => Math.random() - 0.5);
         dispatch({ type: GET_PROFILES, payload: data });
       }
     } catch (error) {
@@ -44,4 +42,3 @@ export const getProfilesAction = () => {
     }
   };
 };
-
