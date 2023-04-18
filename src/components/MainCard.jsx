@@ -1,11 +1,18 @@
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileAction } from "../redux/actions";
 
+import UploadImage from "./UploadImage";
+
 const MainCard = () => {
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfileAction());
@@ -18,6 +25,7 @@ const MainCard = () => {
     <>
       {profile && (
         <Card className="mt-3 bg-dark text-white position-relative border-0 mb-3">
+          <UploadImage handleClose={handleClose} show={show} profile={profile}/>
           <Button
             style={{ right: "10px", top: "10px" }}
             variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
@@ -37,6 +45,7 @@ const MainCard = () => {
             <Button
               style={{ right: "10px", top: "0px" }}
               variant="outline-secondary border-0 py-2 rounded-circle position-absolute"
+              onClick={handleShow}
             >
               <FaPen className="text-white fs-4" />
             </Button>
