@@ -11,8 +11,9 @@ import UploadImage from "./UploadImage";
 
 const Experiences = () => {
   const location = useLocation();
+  const [experience, setExperience] = useState(null);
 
-  const content = useSelector(state => state.profile.content);
+  const content = useSelector((state) => state.profile.content);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -35,22 +36,39 @@ const Experiences = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
 
-  const experiencies = useSelector(state => state.profile.experiencies);
+  const experiencies = useSelector((state) => state.profile.experiencies);
 
   return (
     <Card className="bg-dark text-white mb-3 position-relative">
+      {experience && (
+        <>
+          <EditExperience esperienza={experience} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
+          <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
+          <UploadImage
+            handleCloseImg={handleCloseImg}
+            showImg={showImg}
+            url={`https://striveschool-api.herokuapp.com/api/profile/${experience.user}/experiences/${experience._id}/picture`}
+            data={"experience"}
+            username={experience.user}
+          />
+        </>
+      )}
       <Button
         style={{ right: "0px", top: "0px" }}
         variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
-        onClick={handleShow}
+        onClick={() => {
+          console.log("ciao", experience);
+          setExperience(experience);
+          handleShow();
+        }}
       >
         <FaPlus className="text-white fs-5" />
       </Button>
       <Card.Title className="mt-3 ms-3">Esperienza</Card.Title>
       {location.pathname === "/profile"
-        ? experiencies.slice(0, 3).map(experience => (
+        ? experiencies.slice(0, 3).map((experience) => (
             <Card.Body key={experience._id} className="position-relative">
-              <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
+              {/* <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
               <EditExperience esperienza={experience} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
               <UploadImage
                 handleCloseImg={handleCloseImg}
@@ -58,11 +76,16 @@ const Experiences = () => {
                 url={`https://striveschool-api.herokuapp.com/api/profile/${experience.user}/experiences/${experience._id}/picture`}
                 data={"experience"}
                 username={experience.user}
-              />
+              /> */}
               <Button
                 style={{ right: "0px", top: "20px" }}
                 variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
-                onClick={handleShowEdit}
+                // onClick={handleShowEdit}
+                onClick={() => {
+                  console.log("ciao", experience);
+                  setExperience(experience);
+                  handleShowEdit();
+                }}
               >
                 <FaPen className="text-white fs-5" />
               </Button>
@@ -70,7 +93,11 @@ const Experiences = () => {
                 <Col className="d-flex gap-2">
                   <div>
                     <img
-                      onClick={handleShowImg}
+                      onClick={() => {
+                        setExperience(experience);
+                        handleShowImg();
+                      }}
+                      // onClick={handleShowImg}
                       style={{ cursor: "pointer" }}
                       src={experience.image}
                       alt="Experience"
@@ -101,21 +128,27 @@ const Experiences = () => {
               </Row>
             </Card.Body>
           ))
-        : experiencies.map(experience => (
+        : experiencies.map((experience) => (
             <Card.Body key={experience._id} className="position-relative">
-              <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
-              <EditExperience esperienza={experience} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
-              <UploadImage
-                handleCloseImg={handleCloseImg}
-                showImg={showImg}
-                url={`https://striveschool-api.herokuapp.com/api/profile/${experience.user}/experiences/${experience._id}/picture`}
-                data={"experience"}
-                username={experience.user}
-              />
+              {/* <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
+          <EditExperience esperienza={experience} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
+          <UploadImage
+            handleCloseImg={handleCloseImg}
+            showImg={showImg}
+            url={`https://striveschool-api.herokuapp.com/api/profile/${experience.user}/experiences/${experience._id}/picture`}
+            data={"experience"}
+            username={experience.user}
+          /> */}
+
               <Button
                 style={{ right: "0px", top: "20px" }}
                 variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
-                onClick={handleShowEdit}
+                // onClick={handleShowEdit}
+                onClick={() => {
+                  console.log("ciao", experience);
+                  setExperience(experience);
+                  handleShowEdit();
+                }}
               >
                 <FaPen className="text-white fs-5" />
               </Button>
@@ -123,7 +156,11 @@ const Experiences = () => {
                 <Col className="d-flex gap-2">
                   <div>
                     <img
-                      onClick={handleShowImg}
+                      onClick={() => {
+                        setExperience(experience);
+                        handleShowImg();
+                      }}
+                      // onClick={handleShowImg}
                       style={{ cursor: "pointer" }}
                       src={experience.image}
                       alt="Experience"
