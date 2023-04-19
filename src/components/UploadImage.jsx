@@ -3,7 +3,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { getProfileAction } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
-const UploadImage = ({ showImg, handleCloseImg, url, username }) => {
+const UploadImage = ({ showImg, handleCloseImg, data, url, username }) => {
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ const UploadImage = ({ showImg, handleCloseImg, url, username }) => {
       }
 
       const formData = new FormData();
-      formData.append("profile", image);
+      formData.append(data, image);
       formData.append("username", username);
 
       const response = await fetch(url, {

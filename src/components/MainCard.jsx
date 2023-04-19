@@ -28,6 +28,7 @@ const MainCard = () => {
             handleCloseImg={handleCloseImg}
             showImg={showImg}
             url={`https://striveschool-api.herokuapp.com/api/profile/${profile._id}/picture`}
+            data={"profile"}
             username={profile.username}
           />
           <Button
