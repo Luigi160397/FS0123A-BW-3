@@ -3,10 +3,9 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { getProfileAction } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
-const UploadImage = ({ show, handleClose, profile }) => {
+const UploadImage = ({ show, handleClose, url, username }) => {
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
-  const id = profile._id;
 
   const uploadImg = async e => {
     e.preventDefault();
@@ -20,9 +19,9 @@ const UploadImage = ({ show, handleClose, profile }) => {
 
       const formData = new FormData();
       formData.append("profile", image);
-      formData.append("username", profile.username);
+      formData.append("username", username);
 
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}/picture`, {
+      const response = await fetch(url, {
         method: "POST",
         body: formData,
         headers: {
