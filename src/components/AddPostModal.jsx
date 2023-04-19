@@ -7,7 +7,8 @@ const AddPostModal = ({ show, handleClose }) => {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile.content);
   const [post, setPost] = useState({
-    text: ""
+    text: "",
+    image: ""
   });
 
   const addPost = async e => {
@@ -64,6 +65,16 @@ const AddPostModal = ({ show, handleClose }) => {
               required
               value={post.text}
               onChange={e => setPost({ ...post, text: e.target.value })}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="description">
+            <Form.Control
+              type="text"
+              className="bg-dark border-0 p-0 text-white"
+              placeholder="Inserisci un url di un immagine"
+              required
+              value={post.image}
+              onChange={e => setPost({ ...post, image: e.target.value })}
             />
           </Form.Group>
           <Button className="rounded-pill" variant="secondary" type="submit">
