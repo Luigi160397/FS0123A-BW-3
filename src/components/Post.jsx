@@ -21,12 +21,12 @@ const Post = () => {
     <>
       {posts.slice(0, 20).map(post => (
         <Card className="bg-dark text-white mt-3" key={post._id}>
-          {posts.length > 0 && post && (
+          {posts.length > 0 && post && post.user && (
             <CardHeader className="d-flex gap-2">
               <div>
                 <img
                   className="border border-dark border-2 rounded-circle"
-                  src={post && post.user.image ? post.user.image : avatar1}
+                  src={post.user.image ? post.user.image : avatar1}
                   alt="avatar"
                   width={48}
                   height={48}
