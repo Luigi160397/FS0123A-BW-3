@@ -16,7 +16,6 @@ const EditPost = ({ showEdit, handleCloseEdit, selectedPost }) => {
             text: selectedPost.text,
             image: selectedPost.image
         });
-        console.log(selectedPost, post);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedPost]);
 
