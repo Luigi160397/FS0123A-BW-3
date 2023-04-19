@@ -1,6 +1,7 @@
 export const GET_PROFILE = "GET_PROFILE";
 export const GET_PROFILES = "GET_PROFILES";
 export const GET_EXPERIENCES = "GET_EXPERIENCES";
+export const GET_POSTS = "GET_POSTS";
 
 export const getProfileAction = () => {
   const url = "https://striveschool-api.herokuapp.com/api/profile/me";
@@ -64,3 +65,25 @@ export const getExperiencesAction = (id) => {
     }
   };
 };
+
+export const getPostsAction = () => {
+  const url = `https://striveschool-api.herokuapp.com/api/posts/`;
+  const token = process.env.REACT_APP_API_KEY;
+  return async dispatch => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: token
+        }
+      });
+      if (resp.ok) {
+        let data = await resp.json();
+        data.sort(() => Math.random() - 0.5);
+        dispatch({ type: GET_POSTS, payload: data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+

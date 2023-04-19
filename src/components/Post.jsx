@@ -1,15 +1,30 @@
+import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import { useDispatch, useSelector } from "react-redux";
+import { getPostsAction } from "../redux/actions";
 
 const Post = () => {
+
+  const dispatch=useDispatch();
+
+  useEffect(()=>{
+    dispatch(getPostsAction());
+  },[])
+
+  const posts=useSelector(state => state.home.posts);
+  
+  console.log(posts);
+
   return (
     <>
-      <Card className="bg-dark text-white mt-3">
+      {posts.slice(0,20).map(post => (
+      <Card className="bg-dark text-white mt-3" key={post._id}>
         <CardHeader className="d-flex gap-2">
           <div>
             <img
               className="border border-dark border-2 rounded-circle"
-              src="https://picsum.photos/200/300"
+              src={post.user.image}
               alt="avatar"
               width={48}
               height={48}
@@ -17,21 +32,24 @@ const Post = () => {
           </div>
           <div>
             <Card.Text className="mb-0" style={{ fontSize: "14px" }}>
-              .user.name .user.surname
+              {post.user.name} {post.user.surname}
             </Card.Text>
             <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
-              .user.title
+              {post.user.title}
             </Card.Text>
             <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
-              .createdAt
+              {post.createdAt}
             </Card.Text>
           </div>
         </CardHeader>
         <Card.Body>
-          <Card.Text>.text</Card.Text>
-          <img src="https://picsum.photos/200/300" width={"100%"} height={"300px"} alt="avatar" />
+          <Card.Text>{post.text}</Card.Text>
+          {posts.length > 0 && post && post.image && (
+            <img src={post.image} width={"100%"} height={"300px"} alt="postImage" />
+          )}
         </Card.Body>
       </Card>
+      ))}
     </>
   );
 };
