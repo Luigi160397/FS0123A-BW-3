@@ -37,6 +37,7 @@ export const getProfilesAction = () => {
       if (resp.ok) {
         let data = await resp.json();
         data.sort(() => Math.random() - 0.5);
+        // data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         dispatch({ type: GET_PROFILES, payload: data });
       }
     } catch (error) {
@@ -45,8 +46,7 @@ export const getProfilesAction = () => {
   };
 };
 
-export const getExperiencesAction = (id) => {
-  
+export const getExperiencesAction = id => {
   const url = `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`;
   const token = process.env.REACT_APP_API_KEY;
   return async dispatch => {
@@ -86,4 +86,3 @@ export const getPostsAction = () => {
     }
   };
 };
-

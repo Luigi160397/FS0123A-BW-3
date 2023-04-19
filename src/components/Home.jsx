@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import HomeSidebar from "./HomeSidebar";
 import Post from "./Post";
+import AddPost from "./AddPost";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
           <HomeSidebar />
         </Col>
         <Col lg={6}>
+          <AddPost />
           <Post />
         </Col>
         <Col lg={4}>
