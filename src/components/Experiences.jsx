@@ -7,6 +7,7 @@ import { getExperiencesAction } from "../redux/actions";
 import AddExperience from "./AddExperience";
 import EditExperience from "./EditExperience";
 import { Link, useLocation } from "react-router-dom";
+import UploadImage from "./UploadImage";
 
 const Experiences = () => {
   const location = useLocation();
@@ -20,6 +21,10 @@ const Experiences = () => {
 
   const handleCloseEdit = () => setShowEdit(false);
   const handleShowEdit = () => setShowEdit(true);
+
+  const [showImg, setShowImg] = useState(false);
+  const handleCloseImg = () => setShowImg(false);
+  const handleShowImg = () => setShowImg(true);
 
   const dispatch = useDispatch();
 
@@ -47,6 +52,13 @@ const Experiences = () => {
             <Card.Body key={experience._id} className="position-relative">
               <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
               <EditExperience esperienza={experience} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
+              <UploadImage
+                handleCloseImg={handleCloseImg}
+                showImg={showImg}
+                url={`https://striveschool-api.herokuapp.com/api/profile/${experience.user}/experiences/${experience._id}/picture`}
+                data={"experience"}
+                username={experience.user}
+              />
               <Button
                 style={{ right: "0px", top: "20px" }}
                 variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
@@ -56,8 +68,8 @@ const Experiences = () => {
               </Button>
               <Row>
                 <Col className="d-flex gap-2">
-                  <div>
-                    <img src="https://picsum.photos/900/300" alt="Experience" width={48} height={48} />
+                  <div onClick={handleShowImg}>
+                    <img src={experience.image} alt="Experience" width={48} height={48} />
                   </div>
                   <div>
                     <Card.Title>{experience.role}</Card.Title>
@@ -86,6 +98,13 @@ const Experiences = () => {
             <Card.Body key={experience._id} className="position-relative">
               <AddExperience esperienza={experience} show={show} handleClose={handleClose} />
               <EditExperience esperienza={experience} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
+              <UploadImage
+                handleCloseImg={handleCloseImg}
+                showImg={showImg}
+                url={`https://striveschool-api.herokuapp.com/api/profile/${experience.user}/experiences/${experience._id}/picture`}
+                data={"experience"}
+                username={experience.user}
+              />
               <Button
                 style={{ right: "0px", top: "20px" }}
                 variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
@@ -95,8 +114,8 @@ const Experiences = () => {
               </Button>
               <Row>
                 <Col className="d-flex gap-2">
-                  <div>
-                    <img src="https://picsum.photos/900/300" alt="Experience" width={48} height={48} />
+                  <div onClick={handleShowImg}>
+                    <img src={experience.image} alt="Experience" width={48} height={48} />
                   </div>
                   <div>
                     <Card.Title>{experience.role}</Card.Title>
