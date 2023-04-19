@@ -68,8 +68,15 @@ const Experiences = () => {
               </Button>
               <Row>
                 <Col className="d-flex gap-2">
-                  <div onClick={handleShowImg}>
-                    <img src={experience.image} alt="Experience" width={48} height={48} />
+                  <div>
+                    <img
+                      onClick={handleShowImg}
+                      style={{ cursor: "pointer" }}
+                      src={experience.image}
+                      alt="Experience"
+                      width={48}
+                      height={48}
+                    />
                   </div>
                   <div>
                     <Card.Title>{experience.role}</Card.Title>
@@ -114,8 +121,15 @@ const Experiences = () => {
               </Button>
               <Row>
                 <Col className="d-flex gap-2">
-                  <div onClick={handleShowImg}>
-                    <img src={experience.image} alt="Experience" width={48} height={48} />
+                  <div>
+                    <img
+                      onClick={handleShowImg}
+                      style={{ cursor: "pointer" }}
+                      src={experience.image}
+                      alt="Experience"
+                      width={48}
+                      height={48}
+                    />
                   </div>
                   <div>
                     <Card.Title>{experience.role}</Card.Title>
