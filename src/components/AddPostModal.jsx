@@ -72,7 +72,6 @@ const AddPostModal = ({ show, handleClose }) => {
               type="text"
               className="bg-dark border-0 p-0 text-white"
               placeholder="Inserisci un url di un immagine"
-              required
               value={post.image}
               onChange={e => setPost({ ...post, image: e.target.value })}
             />
