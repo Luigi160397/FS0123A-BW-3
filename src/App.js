@@ -7,6 +7,7 @@ import Profile from "./components/Profile";
 import Experiences from "./components/Experiences";
 import { Col, Container, Row } from "react-bootstrap";
 import Sidebar from "./components/Sidebar";
+import Home from "./components/Home";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <MyNav />
         <Routes>
+          <Route path="/" element={<Home/>} />
           <Route path="/profile" element={<Profile />} />
           <Route
             path="/experiences"
