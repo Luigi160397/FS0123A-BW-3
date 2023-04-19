@@ -3,7 +3,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { getProfileAction } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
-const UploadImage = ({ show, handleClose, url, username }) => {
+const UploadImage = ({ showImg, handleCloseImg, url, username }) => {
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ const UploadImage = ({ show, handleClose, url, username }) => {
 
       if (response.ok) {
         dispatch(getProfileAction());
-        handleClose();
+        handleCloseImg();
       }
     } catch (error) {
       alert(error);
@@ -39,7 +39,7 @@ const UploadImage = ({ show, handleClose, url, username }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose} className="text-white">
+    <Modal show={showImg} onHide={handleCloseImg} className="text-white">
       <Modal.Header className="bg-dark text-white" closeButton>
         <Modal.Title>Aggiungi immagine</Modal.Title>
       </Modal.Header>

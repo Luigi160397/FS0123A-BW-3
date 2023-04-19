@@ -8,9 +8,9 @@ import { getProfileAction } from "../redux/actions";
 import UploadImage from "./UploadImage";
 
 const MainCard = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [showImg, setShowImg] = useState(false);
+  const handleCloseImg = () => setShowImg(false);
+  const handleShowImg = () => setShowImg(true);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,8 +25,8 @@ const MainCard = () => {
       {profile && (
         <Card className="mt-3 bg-dark text-white position-relative border-0 mb-3">
           <UploadImage
-            handleClose={handleClose}
-            show={show}
+            handleCloseImg={handleCloseImg}
+            showImg={showImg}
             url={`https://striveschool-api.herokuapp.com/api/profile/${profile._id}/picture`}
             username={profile.username}
           />
@@ -49,7 +49,7 @@ const MainCard = () => {
             <Button
               style={{ right: "10px", top: "0px" }}
               variant="outline-secondary border-0 py-2 rounded-circle position-absolute"
-              onClick={handleShow}
+              onClick={handleShowImg}
             >
               <FaPen className="text-white fs-4" />
             </Button>
