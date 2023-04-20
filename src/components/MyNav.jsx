@@ -30,6 +30,8 @@ const MyNav = () => {
     e.preventDefault();
     dispatch(getSearchQueryAction(query));
 
+    console.log(query);
+
     console.log(resultQuery);
     
     setQuery("");
