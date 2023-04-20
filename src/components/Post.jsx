@@ -27,8 +27,6 @@ const Post = () => {
 
   const posts = useSelector((state) => state.home.posts);
 
-  console.log(posts);
-
   return (
     <>
       {selectedPost && (

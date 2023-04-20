@@ -8,15 +8,14 @@ import aziende from "../assets/aziende.svg";
 import notifiche from "../assets/notifiche.svg";
 import avatar from "../assets/avatar.png";
 import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getSearchQueryAction } from "../redux/actions";
 
 const MyNav = () => {
   const [query, setQuery] = useState("");
-  const queryResult = useSelector((state) => state.home.queryResult);
-
+ 
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -24,14 +23,15 @@ const MyNav = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const navigator=useNavigate()
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getSearchQueryAction(query));
-    
-    /*console.log(query);
-    console.log("ciao", queryResult);*/
-    
-    //setQuery("");
+    if(query !== ""){
+      dispatch(getSearchQueryAction(query));
+      navigator('/jobs');
+      setQuery("");
+    }
   };
 
   return (

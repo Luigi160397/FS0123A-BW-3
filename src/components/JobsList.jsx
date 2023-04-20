@@ -1,16 +1,11 @@
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
-import { addToFavouriteAction, removeFromFavouriteAction } from "../redux/actions";
 
-import moment from "moment";
-import "moment/locale/it";
-
-import avatar from "../assets/avatar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getJobsAction } from "../redux/actions";
 import Job from "./Job";
+import { Link } from "react-router-dom";
 
 const JobsList = () => {
 
@@ -19,60 +14,42 @@ const JobsList = () => {
     const jobs = useSelector((state) => state.job.jobs);
     const dispatch = useDispatch();
 
-    const favourites = useSelector((state) => state.job.favJobs);
-    const isFav = favourites.includes(jobs._id);
-
     useEffect(() => {
         dispatch(getJobsAction());
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        console.log(jobs);
     }, []);
+
     return (
         <>
-            {queryResult.length > 0 &&
-                queryResult.slice(0, 10).map((result) => (
-                    <Card className="bg-dark text-white mt-3 position-relative">
+            {queryResult && queryResult.length > 0 && (
+                <Card className="bg-dark text-white mt-3 position-relative">
+                    <CardHeader>
+                        <Card.Title className="mb-0">Risultati della ricerca:</Card.Title>
+                    </CardHeader>
+                    {queryResult.slice(0, 10).map((result) => (
                         <Job key={result._id} job={result} />
-                    </Card>
-                ))
-            }
+                    ))}
+                    <Card.Footer className="d-flex justify-content-center">
+                        <Link className="card-text text-decoration-none text-white">
+                            Visualizza altre
+                        </Link>
+                    </Card.Footer>
+                </Card>
+            )}
             <Card className="bg-dark text-white mt-3 position-relative">
                 <CardHeader>
                     <Card.Title className="mb-0">Consigliato per te</Card.Title>
                     <Card.Text className="text-muted">Sulla base del tuo profilo e della cronologia e delle ricerche</Card.Text>
                 </CardHeader>
-                {jobs.length > 0 &&
+                {jobs && jobs.length > 0 &&
                     jobs.slice(0, 10).map((job) => (
                         <Job key={job._id} job={job} />
-                        // <Card.Body key={job._id} className="pb-0">
-                        //   <div className="border-bottom border-secondary d-flex justify-content-between align-items-start pb-2">
-                        //     <div className="d-flex">
-                        //       <img style={{ cursor: "pointer" }} src={avatar} alt="Jobs" width={48} height={48} className="me-3" />
-                        //       <div>
-                        //         <Card.Title style={{ fontSize: "16px", color: "#81B4F5" }}>{job.title}</Card.Title>
-                        //         <Card.Subtitle style={{ fontSize: "14px", color: "#eeeeeee6" }}>{job.company_name}</Card.Subtitle>
-                        //         <Card.Text style={{ fontSize: "14px" }} className="text-muted mb-0">
-                        //           {job.candidate_required_location}
-                        //         </Card.Text>
-                        //         {/* <Card.Text className="text-muted mb-2">{job.description}</Card.Text> */}
-                        //         <Card.Text style={{ fontSize: "12px" }} className="text-muted mb-0">
-                        //           Pubblicato il: {moment(job.publication_date).locale("IT").format("LL", "it")}
-                        //         </Card.Text>
-                        //       </div>
-                        //     </div>
-                        //     <Button style={{ right: "0px", top: "20px" }} variant="transparent border-0 py-1 px-2 rounded-circle">
-                        //       {isFav ? (
-                        //         <FaBookmark
-                        //           className="text-white fs-5"
-                        //           onClick={() => dispatch(removeFromFavouriteAction(jobs._id))}
-                        //         />
-                        //       ) : (
-                        //         <FaRegBookmark className="text-white fs-5" onClick={() => dispatch(addToFavouriteAction(jobs._id))} />
-                        //       )}
-                        //     </Button>
-                        //   </div>
-                        // </Card.Body>
                     ))}
+                <Card.Footer className="d-flex justify-content-center">
+                    <Link className="card-text text-decoration-none text-white">
+                        Visualizza altre
+                    </Link>
+                </Card.Footer>
             </Card>
         </>
     );

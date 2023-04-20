@@ -103,9 +103,10 @@ export const getJobsAction = () => {
         }
       });
       if (resp.ok) {
-        let data = await resp.json();
-
-        dispatch({ type: GET_JOBS, payload: data.data });
+        let {data} = await resp.json();
+        data.sort(() => Math.random() - 0.5);
+        //dispatch({ type: GET_JOBS, payload: data.data });
+        dispatch({ type: GET_JOBS, payload: data });
       }
     } catch (error) {
       console.log(error);

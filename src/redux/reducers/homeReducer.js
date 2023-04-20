@@ -5,7 +5,7 @@ const initialState = {
   queryResult: []
 };
 
-const profileReducer = (state = initialState, action) => {
+const homeReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POSTS:
       return {
@@ -22,4 +22,4 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export default profileReducer;
+export default homeReducer;
