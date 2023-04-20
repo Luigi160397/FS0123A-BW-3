@@ -14,12 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSearchQueryAction } from "../redux/actions";
 
 const MyNav = () => {
-
-  const resultQuery = useSelector((state) => state.home.resultQuery);
+  const [query, setQuery] = useState("");
+  const queryResult = useSelector((state) => state.home.queryResult);
 
   const dispatch = useDispatch();
-
-  const [query, setQuery]= useState("");
 
   const [show, setShow] = useState(false);
 
@@ -29,12 +27,9 @@ const MyNav = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getSearchQueryAction(query));
-
     console.log(query);
-
-    console.log(resultQuery);
-    
-    setQuery("");
+    console.log("ciao", queryResult);
+    // setQuery("");
   };
 
   return (
@@ -45,13 +40,14 @@ const MyNav = () => {
             <img src={logo} alt="logo" width={50} height={50} />
           </Link>
           <Form className="d-flex position-relative me-5" onSubmit={handleSubmit}>
-            <Form.Control 
-            type="search" 
-            placeholder="Cerca" 
-            className="me-2 ps-5 pe-5 " 
-            aria-label="Search"
-            value={query} 
-            onChange={(e) => setQuery(e.target.value)}/>
+            <Form.Control
+              type="search"
+              placeholder="Cerca"
+              className="me-2 ps-5 pe-5 "
+              aria-label="Search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
             <FaSearch style={{ left: "10px", top: "8px" }} className="position-absolute fs-5" />
           </Form>
         </div>

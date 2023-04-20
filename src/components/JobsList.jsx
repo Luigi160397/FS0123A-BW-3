@@ -1,6 +1,8 @@
 import { Button, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { addToFavouriteAction, removeFromFavouriteAction } from "../redux/actions";
+
 import moment from "moment";
 import "moment/locale/it";
 
@@ -12,6 +14,9 @@ import { getJobsAction } from "../redux/actions";
 const JobsList = () => {
   const jobs = useSelector((state) => state.job.jobs);
   const dispatch = useDispatch();
+
+  const favourites = useSelector((state) => state.job.favJobs);
+  const isFav = favourites.includes(jobs._id);
 
   useEffect(() => {
     dispatch(getJobsAction());
@@ -42,11 +47,15 @@ const JobsList = () => {
                   </Card.Text>
                 </div>
               </div>
-              <Button
-                style={{ right: "0px", top: "20px" }}
-                variant="transparent border-0 py-1 px-2 rounded-circle"
-              >
-                <FaRegBookmark className="text-white fs-5" />
+              <Button style={{ right: "0px", top: "20px" }} variant="transparent border-0 py-1 px-2 rounded-circle">
+                {isFav ? (
+                  <FaBookmark
+                    className="text-white fs-5"
+                    onClick={() => dispatch(removeFromFavouriteAction(jobs._id))}
+                  />
+                ) : (
+                  <FaRegBookmark className="text-white fs-5" onClick={() => dispatch(addToFavouriteAction(jobs._id))} />
+                )}
               </Button>
             </div>
           </Card.Body>

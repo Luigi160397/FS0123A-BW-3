@@ -4,6 +4,8 @@ export const GET_EXPERIENCES = "GET_EXPERIENCES";
 export const GET_POSTS = "GET_POSTS";
 export const GET_JOBS = "GET_JOBS";
 export const GET_SEARCH_QUERY = "GET_SEARCH_QUERY";
+export const ADD_TO_FAVOURITE = 'ADD_TO_FAVOURITE'
+export const REMOVE_FROM_FAVOURITE = 'REMOVE_FROM_FAVOURITE'
 
 export const getProfileAction = () => {
   const url = "https://striveschool-api.herokuapp.com/api/profile/me";
@@ -122,7 +124,7 @@ export const getSearchQueryAction = (query) => {
         }
       });
       if (resp.ok) {
-        let data = await resp.json();
+        let { data } = await resp.json();
 
         dispatch({ type: GET_SEARCH_QUERY, payload: data });
       }
@@ -131,4 +133,15 @@ export const getSearchQueryAction = (query) => {
     }
   };
 };
+
+
+export const addToFavouriteAction = (job) => ({
+  type: ADD_TO_FAVOURITE,
+  payload: job,
+})
+
+export const removeFromFavouriteAction = (job) => ({
+  type: REMOVE_FROM_FAVOURITE,
+  payload: job,
+})
 
