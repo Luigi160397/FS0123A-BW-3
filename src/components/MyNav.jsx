@@ -42,7 +42,7 @@ const MyNav = () => {
             </span>
             <span>Rete</span>
           </Link>
-          <Link className="nav-link d-flex flex-column justify-content-center align-items-center" to="/">
+          <Link className="nav-link d-flex flex-column justify-content-center align-items-center" to="/jobs">
             <span>
               <img width={30} height={30} src={work} alt="work" />
             </span>

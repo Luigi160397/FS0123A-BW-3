@@ -8,6 +8,7 @@ import Experiences from "./components/Experiences";
 import { Col, Container, Row } from "react-bootstrap";
 import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
+import Jobs from "./components/Jobs";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/jobs" element={<Jobs />} />
           <Route
             path="/experiences"
             element={
