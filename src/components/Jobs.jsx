@@ -2,6 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import HomeSidebar from "./HomeSidebar";
 import JobsBanner from "./JobsBanner";
+import JobsList from "./JobsList";
 
 const Jobs = () => {
     return(
@@ -12,6 +13,7 @@ const Jobs = () => {
         </Col>
         <Col lg={6}>
           <JobsBanner/>
+          <JobsList/>
         </Col>
         <Col lg={4}>
           <Sidebar />
