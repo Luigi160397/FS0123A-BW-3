@@ -1,6 +1,6 @@
 import { Button, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
-import { FaBookmark } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import moment from "moment";
 import "moment/locale/it";
 
@@ -44,9 +44,9 @@ const JobsList = () => {
               </div>
               <Button
                 style={{ right: "0px", top: "20px" }}
-                variant="outline-secondary border-0 py-1 px-2 rounded-circle"
+                variant="transparent border-0 py-1 px-2 rounded-circle"
               >
-                <FaBookmark className="text-white fs-5" />
+                <FaRegBookmark className="text-white fs-5" />
               </Button>
             </div>
           </Card.Body>
