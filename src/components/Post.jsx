@@ -6,12 +6,13 @@ import { getPostsAction } from "../redux/actions";
 import avatar1 from "../assets/avatar1.png";
 import { FaPen } from "react-icons/fa";
 import EditPost from "./EditPost";
+import moment from "moment";
+import "moment/locale/it";
 
 const Post = () => {
-
   const [selectedPost, setSelectedPost] = useState(null);
 
-  const profile = useSelector(state => state.profile.content);
+  const profile = useSelector((state) => state.profile.content);
   const dispatch = useDispatch();
 
   const [showEdit, setShowEdit] = useState(false);
@@ -24,7 +25,7 @@ const Post = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const posts = useSelector(state => state.home.posts);
+  const posts = useSelector((state) => state.home.posts);
 
   console.log(posts);
 
@@ -36,23 +37,23 @@ const Post = () => {
         </>
       )}
 
-      {posts.slice(0, 20).map(post => (
+      {posts.slice(0, 20).map((post) => (
         <Card className="bg-dark text-white mt-3 position-relative" key={post._id}>
           {posts.length > 0 && post && post.user && (
             <CardHeader className="d-flex gap-2">
-              {profile && post.user._id && post.user._id === profile._id &&
+              {profile && post.user._id && post.user._id === profile._id && (
                 <Button
                   style={{ right: "10px", top: "10px" }}
                   variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
                   onClick={() => {
-                    console.log("Post:"+post);
+                    console.log("Post:" + post);
                     setSelectedPost(post);
                     handleShowEdit();
                   }}
                 >
                   <FaPen className="text-white fs-5" />
                 </Button>
-              }
+              )}
               <div>
                 <img
                   className="border border-dark border-2 rounded-circle"
@@ -70,7 +71,7 @@ const Post = () => {
                   {post.user.title}
                 </Card.Text>
                 <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
-                  {post.createdAt}
+                  {moment(post.createdAt).locale("IT").format("LL", "it")}
                 </Card.Text>
               </div>
             </CardHeader>
