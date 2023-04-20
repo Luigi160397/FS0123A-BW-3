@@ -27,9 +27,11 @@ const MyNav = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getSearchQueryAction(query));
-    console.log(query);
-    console.log("ciao", queryResult);
-    // setQuery("");
+    
+    /*console.log(query);
+    console.log("ciao", queryResult);*/
+    
+    //setQuery("");
   };
 
   return (
