@@ -2,6 +2,7 @@ import { Button, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { FaBookmark } from "react-icons/fa";
 import moment from "moment";
+import "moment/locale/it";
 
 import avatar from "../assets/avatar.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +38,7 @@ const JobsList = () => {
                   </Card.Text>
                   {/* <Card.Text className="text-muted mb-2">{job.description}</Card.Text> */}
                   <Card.Text style={{ fontSize: "12px" }} className="text-muted mb-0">
-                    Pubblicato il: {moment(job.publication_date).format("LL", "it")}
+                    Pubblicato il: {moment(job.publication_date).locale("IT").format("LL", "it")}
                   </Card.Text>
                 </div>
               </div>
