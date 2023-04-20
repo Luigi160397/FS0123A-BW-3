@@ -1,4 +1,4 @@
-import { GET_JOBS, GET_POSTS } from "../actions";
+import { GET_JOBS } from "../actions";
 
 const initialState = {
     jobs: []

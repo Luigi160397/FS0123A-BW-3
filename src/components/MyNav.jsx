@@ -10,12 +10,31 @@ import avatar from "../assets/avatar.png";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getSearchQueryAction } from "../redux/actions";
 
 const MyNav = () => {
+
+  const resultQuery = useSelector((state) => state.home.resultQuery);
+
+  const dispatch = useDispatch();
+
+  const [query, setQuery]= useState("");
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getSearchQueryAction(query));
+
+    console.log(resultQuery);
+    
+    setQuery("");
+  };
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container className="px-5">
@@ -23,8 +42,14 @@ const MyNav = () => {
           <Link className="navbar-brand" to="/">
             <img src={logo} alt="logo" width={50} height={50} />
           </Link>
-          <Form className="d-flex position-relative me-5">
-            <Form.Control type="search" placeholder="Cerca" className="me-2 ps-5 pe-5 " aria-label="Search" />
+          <Form className="d-flex position-relative me-5" onSubmit={handleSubmit}>
+            <Form.Control 
+            type="search" 
+            placeholder="Cerca" 
+            className="me-2 ps-5 pe-5 " 
+            aria-label="Search"
+            value={query} 
+            onChange={(e) => setQuery(e.target.value)}/>
             <FaSearch style={{ left: "10px", top: "8px" }} className="position-absolute fs-5" />
           </Form>
         </div>
