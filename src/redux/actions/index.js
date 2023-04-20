@@ -2,6 +2,7 @@ export const GET_PROFILE = "GET_PROFILE";
 export const GET_PROFILES = "GET_PROFILES";
 export const GET_EXPERIENCES = "GET_EXPERIENCES";
 export const GET_POSTS = "GET_POSTS";
+export const GET_JOBS = "GET_JOBS";
 
 export const getProfileAction = () => {
   const url = "https://striveschool-api.herokuapp.com/api/profile/me";
@@ -79,8 +80,29 @@ export const getPostsAction = () => {
       if (resp.ok) {
         let data = await resp.json();
         //data.sort(() => Math.random() - 0.5);
-        const reversedData=data.toReversed();
+        const reversedData = data.toReversed();
         dispatch({ type: GET_POSTS, payload: reversedData });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getJobsAction = () => {
+  const url = "https://strive-benchmark.herokuapp.com/api/jobs";
+  const token = process.env.REACT_APP_API_KEY;
+  return async dispatch => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: token
+        }
+      });
+      if (resp.ok) {
+        let data = await resp.json();
+
+        dispatch({ type: GET_JOBS, payload: data.data });
       }
     } catch (error) {
       console.log(error);
