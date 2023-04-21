@@ -6,15 +6,11 @@ import avatar from "../assets/avatar.png";
 import moment from "moment";
 import "moment/locale/it";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const Job = ({ job }) => {
   const dispatch = useDispatch();
 
   const favourites = useSelector(state => state.fav.favJobs);
-
-  useEffect(() => {}, [favourites]);
-
   const isFav = favourites.includes(job);
   return (
     <Card.Body className="pb-0">

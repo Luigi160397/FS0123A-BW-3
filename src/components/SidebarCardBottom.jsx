@@ -7,7 +7,7 @@ import { IoMdPeople } from "react-icons/io";
 
 const SidebarCardBotton = () => {
   const dispatch = useDispatch();
-  const content = useSelector((state) => state.profile.content);
+  const content = useSelector(state => state.profile.content);
 
   useEffect(() => {
     if (content) {
@@ -15,9 +15,9 @@ const SidebarCardBotton = () => {
     }
   }, [content]);
 
-  const experiencies = useSelector((state) => state.profile.experiencies);
+  const experiencies = useSelector(state => state.profile.experiencies);
   return (
-    <Card className="mt-1 mb-3 bg-dark text-light">
+    <Card className="mt-1 mb-2 bg-dark text-light">
       <Card.Body className="d-flex flex-column">
         <Link
           to="/experiences"
@@ -27,7 +27,7 @@ const SidebarCardBotton = () => {
           Esperienze
         </Link>
 
-        {experiencies.map((experience) => (
+        {experiencies.map(experience => (
           <Link
             key={experience._id}
             to="/experiences"

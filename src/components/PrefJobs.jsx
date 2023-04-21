@@ -9,7 +9,7 @@ const PrefsJobs = () => {
   useEffect(() => {}, [favJobs]);
 
   return (
-    <Card className="mt-1 mb-3 bg-dark text-light">
+    <Card className="mt-0 mb-2 bg-dark text-light">
       <Card.Body className="d-flex flex-column">
         <Link
           to="/jobs"
