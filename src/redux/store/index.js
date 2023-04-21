@@ -3,6 +3,13 @@ import profileReducer from "../reducers/profileReducer";
 import homeReducer from "../reducers/homeReducer";
 import jobReducer from "../reducers/jobReducer";
 import commentReducer from "../reducers/commentReducer";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+
+const persistConfig = {
+  key: "root",
+  storage
+};
 
 const rootReducer = combineReducers({
   profile: profileReducer,
@@ -11,8 +18,10 @@ const rootReducer = combineReducers({
   comment: commentReducer
 });
 
-const store = configureStore({
-  reducer: rootReducer
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer
 });
 
-export default store;
+export const persistor = persistStore(store);
