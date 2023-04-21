@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 const Job = ({ job }) => {
   const dispatch = useDispatch();
 
-  const favourites = useSelector((state) => state.job.favJobs);
-  const isFav = favourites.includes(job._id);
+  const favourites = useSelector(state => state.job.favJobs);
+  const isFav = favourites.includes(job);
   return (
     <Card.Body className="pb-0">
       <div className="border-bottom border-secondary d-flex justify-content-between align-items-start pb-2">
@@ -31,9 +31,9 @@ const Job = ({ job }) => {
         </div>
         <Button style={{ right: "0px", top: "20px" }} variant="transparent border-0 py-1 px-2 rounded-circle">
           {isFav ? (
-            <FaBookmark className="text-white fs-5" onClick={() => dispatch(removeFromFavouriteAction(job._id))} />
+            <FaBookmark className="text-white fs-5" onClick={() => dispatch(removeFromFavouriteAction(job))} />
           ) : (
-            <FaRegBookmark className="text-white fs-5" onClick={() => dispatch(addToFavouriteAction(job._id))} />
+            <FaRegBookmark className="text-white fs-5" onClick={() => dispatch(addToFavouriteAction(job))} />
           )}
         </Button>
       </div>
