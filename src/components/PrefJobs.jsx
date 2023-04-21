@@ -1,12 +1,9 @@
-import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const PrefsJobs = () => {
   const favJobs = useSelector(state => state.fav.favJobs);
-
-  useEffect(() => {}, [favJobs]);
 
   return (
     <Card className="mt-0 mb-2 bg-dark text-light">
