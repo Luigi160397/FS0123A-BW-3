@@ -11,7 +11,7 @@ const Job = ({ job }) => {
   const dispatch = useDispatch();
 
   const favourites = useSelector(state => state.fav.favJobs);
-  const isFav = favourites.includes(job);
+
   return (
     <Card.Body className="pb-0">
       <div className="border-bottom border-secondary d-flex justify-content-between align-items-start pb-2">
@@ -30,7 +30,7 @@ const Job = ({ job }) => {
           </div>
         </div>
         <Button style={{ right: "0px", top: "20px" }} variant="transparent border-0 py-1 px-2 rounded-circle">
-          {isFav ? (
+          {favourites.includes(job) ? (
             <FaBookmark className="text-white fs-5" onClick={() => dispatch(removeFromFavouriteAction(job))} />
           ) : (
             <FaRegBookmark className="text-white fs-5" onClick={() => dispatch(addToFavouriteAction(job))} />
