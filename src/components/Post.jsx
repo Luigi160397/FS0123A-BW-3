@@ -30,14 +30,14 @@ const Post = () => {
   const posts = useSelector(state => state.home.posts);
 
   return (
-    <>
+    <div id="posts" style={{ height: "1000px", overflow: "auto" }}>
       {selectedPost && (
         <>
           <EditPost selectedPost={selectedPost} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
         </>
       )}
 
-      {posts.slice(0, 20).map(post => (
+      {posts.map(post => (
         <Card className="bg-dark text-white mt-3 position-relative" key={post._id}>
           {posts.length > 0 && post && post.user && (
             <CardHeader className="d-flex gap-2">
@@ -85,18 +85,18 @@ const Post = () => {
               <Button
                 style={{ fontSize: "12px" }}
                 onClick={() => {
-                  setShowComment(!showComment);
+                  setShowComment(showComment === post._id ? null : post._id);
                 }}
                 variant="outline-secondary border-0"
               >
                 commenti
               </Button>
             </div>
-            {showComment && <CommentArea post={post} />}
+            {showComment === post._id && <CommentArea post={post} />}
           </Card.Body>
         </Card>
       ))}
-    </>
+    </div>
   );
 };
 

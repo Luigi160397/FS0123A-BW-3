@@ -12,8 +12,6 @@ const CommentList = ({ post }) => {
 
   const comments = useSelector(state => state.comment.comments);
 
-  console.log(comments);
-
   return (
     <div className="d-flex gap-3">
       <img
