@@ -21,15 +21,19 @@ const CommentList = ({ post }) => {
             <div className="d-flex gap-3">
               <img
                 className="border border-dark border-2 rounded-circle mt-3"
-                src="https://picsum.photos/200/300"
+                src="https://picsum.photos/500/500"
                 alt="avatar"
                 width={48}
                 height={48}
               />
               <Card className="mt-3 mb-3 text-light w-100" style={{ backgroundColor: "#3c4345" }}>
                 <Card.Body>
-                  <Card.Title className="mb-2 fw-bold" style={{fontSize:"14px"}}>{comment.author}</Card.Title>
-                  <Card.Text className="mb-0" style={{fontSize:"12px"}}>{comment.comment}</Card.Text>
+                  <Card.Title className="mb-2 fw-bold" style={{ fontSize: "14px" }}>
+                    {comment.author}
+                  </Card.Title>
+                  <Card.Text className="mb-0" style={{ fontSize: "12px" }}>
+                    {comment.comment}
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </div>
