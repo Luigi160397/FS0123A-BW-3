@@ -84,7 +84,6 @@ export const getPostsAction = () => {
       if (resp.ok) {
         let data = await resp.json();
         //data.sort(() => Math.random() - 0.5);
-        console.log(data);
         const reversedData = data.toReversed();
         dispatch({ type: GET_POSTS, payload: reversedData });
       }

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const PrefsJobs = () => {
-  const favJobs = useSelector(state => state.job.favJobs);
+  const favJobs = useSelector(state => state.fav.favJobs);
 
   useEffect(() => {}, [favJobs]);
 

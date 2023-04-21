@@ -5,16 +5,19 @@ import jobReducer from "../reducers/jobReducer";
 import commentReducer from "../reducers/commentReducer";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import favReducer from "../reducers/favReducer";
 
 const persistConfig = {
   key: "root",
-  storage
+  storage,
+  blacklist: ["home", "profile", "comment", "job"]
 };
 
 const rootReducer = combineReducers({
   profile: profileReducer,
   home: homeReducer,
   job: jobReducer,
+  fav: favReducer,
   comment: commentReducer
 });
 
