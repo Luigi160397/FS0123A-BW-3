@@ -1,6 +1,19 @@
+import { useEffect } from "react";
 import { Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getCommentsAction } from "../redux/actions";
 
 const CommentList = ({ post }) => {
+  const dispatch = useDispatch();
+  const url = `https://striveschool-api.herokuapp.com/api/comments/${post._id}`;
+  useEffect(() => {
+    dispatch(getCommentsAction(url));
+  }, []);
+
+  const comments = useSelector(state => state.comment.comments);
+
+  console.log(comments);
+
   return (
     <div className="d-flex gap-3">
       <img
