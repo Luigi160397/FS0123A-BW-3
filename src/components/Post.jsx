@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostsAction } from "../redux/actions";
+import { getCommentsAction, getPostsAction } from "../redux/actions";
 import avatar1 from "../assets/avatar1.png";
 import { FaPen } from "react-icons/fa";
 import EditPost from "./EditPost";
@@ -14,7 +14,8 @@ const Post = () => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [showComment, setShowComment] = useState(false);
 
-  const profile = useSelector(state => state.profile.content);
+  const profile = useSelector((state) => state.profile.content);
+
   const dispatch = useDispatch();
 
   const [showEdit, setShowEdit] = useState(false);
@@ -27,7 +28,7 @@ const Post = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const posts = useSelector(state => state.home.posts);
+  const posts = useSelector((state) => state.home.posts);
 
   return (
     <div id="posts" style={{ height: "1000px", overflow: "auto" }}>
@@ -37,7 +38,7 @@ const Post = () => {
         </>
       )}
 
-      {posts.map(post => (
+      {posts.slice(0, 20).map((post) => (
         <Card className="bg-dark text-white mt-3 position-relative" key={post._id}>
           {posts.length > 0 && post && post.user && (
             <CardHeader className="d-flex gap-2">
@@ -88,6 +89,7 @@ const Post = () => {
                   setShowComment(showComment === post._id ? null : post._id);
                 }}
                 variant="outline-secondary border-0"
+                className="mt-2"
               >
                 commenti
               </Button>
@@ -96,6 +98,11 @@ const Post = () => {
           </Card.Body>
         </Card>
       ))}
+      <div className="d-flex justify-content-center mt-3">
+        <Button className="w-100 text-white" variant="outline-secondary">
+          Visualizza altri post
+        </Button>
+      </div>
     </div>
   );
 };
