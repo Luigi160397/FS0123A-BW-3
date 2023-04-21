@@ -5,15 +5,45 @@ import { getPostsAction } from "../redux/actions";
 
 const AddPostModal = ({ show, handleClose }) => {
   const dispatch = useDispatch();
-  const profile = useSelector(state => state.profile.content);
+  const profile = useSelector((state) => state.profile.content);
   const [post, setPost] = useState({
-    text: "",
-    image: ""
+    text: ""
   });
 
-  const addPost = async e => {
+  const [image, setImage] = useState(null);
+
+  const addPost = async (e) => {
     e.preventDefault();
     const token = process.env.REACT_APP_API_KEY;
+
+    const fetchImage = async (data) => {
+      try {
+        if (!image) {
+          alert("Please select an image to upload");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("post", image);
+        formData.append("username", profile.username);
+
+        const response = await fetch(`https://striveschool-api.herokuapp.com/api/posts/${data}`, {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: token
+          }
+        });
+
+        if (response.ok) {
+          setImage(null);
+          dispatch(getPostsAction());
+        }
+      } catch (error) {
+        alert(error);
+      }
+    };
+
     try {
       const response = await fetch(`https://striveschool-api.herokuapp.com/api/posts/`, {
         method: "POST",
@@ -24,6 +54,10 @@ const AddPostModal = ({ show, handleClose }) => {
         }
       });
       if (response.ok) {
+        const data = await response.json();
+        if (image) {
+          fetchImage(data._id);
+        }
         dispatch(getPostsAction());
         setPost({
           text: ""
@@ -64,16 +98,15 @@ const AddPostModal = ({ show, handleClose }) => {
               rows={3}
               required
               value={post.text}
-              onChange={e => setPost({ ...post, text: e.target.value })}
+              onChange={(e) => setPost({ ...post, text: e.target.value })}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="description">
             <Form.Control
-              type="text"
+              type="file"
               className="bg-dark border-0 p-0 text-white"
               placeholder="Inserisci un url di un immagine"
-              value={post.image}
-              onChange={e => setPost({ ...post, image: e.target.value })}
+              onChange={(e) => setImage(e.target.files[0])}
             />
           </Form.Group>
           <Button className="rounded-pill" variant="secondary" type="submit">
