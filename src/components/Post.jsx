@@ -8,11 +8,13 @@ import { FaPen } from "react-icons/fa";
 import EditPost from "./EditPost";
 import moment from "moment";
 import "moment/locale/it";
+import CommentArea from "./CommentArea";
 
 const Post = () => {
   const [selectedPost, setSelectedPost] = useState(null);
+  const [showComment, setShowComment] = useState(false);
 
-  const profile = useSelector((state) => state.profile.content);
+  const profile = useSelector(state => state.profile.content);
   const dispatch = useDispatch();
 
   const [showEdit, setShowEdit] = useState(false);
@@ -25,7 +27,7 @@ const Post = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const posts = useSelector((state) => state.home.posts);
+  const posts = useSelector(state => state.home.posts);
 
   return (
     <>
@@ -35,7 +37,7 @@ const Post = () => {
         </>
       )}
 
-      {posts.slice(0, 20).map((post) => (
+      {posts.slice(0, 20).map(post => (
         <Card className="bg-dark text-white mt-3 position-relative" key={post._id}>
           {posts.length > 0 && post && post.user && (
             <CardHeader className="d-flex gap-2">
@@ -79,6 +81,18 @@ const Post = () => {
             {posts.length > 0 && post && post.image && (
               <img src={post.image} width={"100%"} height={"300px"} alt="postImage" />
             )}
+            <div className="d-flex justify-content-end">
+              <Button
+                style={{ fontSize: "12px" }}
+                onClick={() => {
+                  setShowComment(!showComment);
+                }}
+                variant="outline-secondary border-0"
+              >
+                commenti
+              </Button>
+            </div>
+            {showComment && <CommentArea post={post} />}
           </Card.Body>
         </Card>
       ))}
