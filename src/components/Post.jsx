@@ -13,6 +13,7 @@ import CommentArea from "./CommentArea";
 const Post = () => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [showComment, setShowComment] = useState(false);
+  const [postNumber, setPostNumber] = useState(20);
 
   const profile = useSelector((state) => state.profile.content);
 
@@ -38,7 +39,7 @@ const Post = () => {
         </>
       )}
 
-      {posts.slice(0, 20).map((post) => (
+      {posts.slice(0, postNumber).map((post) => (
         <Card className="bg-dark text-white mt-3 position-relative" key={post._id}>
           {posts.length > 0 && post && post.user && (
             <CardHeader className="d-flex gap-2">
@@ -99,7 +100,7 @@ const Post = () => {
         </Card>
       ))}
       <div className="d-flex justify-content-center mt-3">
-        <Button className="w-100 text-white" variant="outline-secondary">
+        <Button className="w-100 text-white" variant="outline-secondary" onClick={() => setPostNumber(postNumber + 10)}>
           Visualizza altri post
         </Button>
       </div>
