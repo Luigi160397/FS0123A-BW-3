@@ -23,7 +23,7 @@ const MyNav = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const navigator=useNavigate()
+  const navigator=useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
