@@ -18,7 +18,6 @@ const EditExperience = ({ showEdit, handleCloseEdit, esperienza }) => {
       description: esperienza.description,
       area: esperienza.area
     });
-    console.log(esperienza, experience);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [esperienza]);
 

@@ -1,9 +1,10 @@
+import AddComment from "./AddComment";
 import CommentList from "./CommentList";
 
 const CommentArea = ({ post }) => {
   return (
     <>
-      <h1>addcomment</h1>
+      <AddComment post={post}/>
       <CommentList post={post} />
     </>
   );
