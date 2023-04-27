@@ -1,7 +1,8 @@
-import { ADD_TO_FAVOURITE, REMOVE_FROM_FAVOURITE } from "../actions";
+import { ADD_FRIEND, ADD_TO_FAVOURITE, REMOVE_FRIEND, REMOVE_FROM_FAVOURITE } from "../actions";
 
 const initialState = {
-  favJobs: []
+  favJobs: [],
+  friends: []
 };
 
 const favReducer = (state = initialState, action) => {
@@ -15,6 +16,16 @@ const favReducer = (state = initialState, action) => {
       return {
         ...state,
         favJobs: state.favJobs.filter(fav => fav._id !== action.payload._id)
+      };
+    case ADD_FRIEND:
+      return {
+        ...state,
+        friends: [...state.friends, action.payload]
+      };
+    case REMOVE_FRIEND:
+      return {
+        ...state,
+        friends: state.friends.filter(fav => fav._id !== action.payload._id)
       };
     default:
       return state;

@@ -7,6 +7,8 @@ export const GET_SEARCH_QUERY = "GET_SEARCH_QUERY";
 export const ADD_TO_FAVOURITE = "ADD_TO_FAVOURITE";
 export const REMOVE_FROM_FAVOURITE = "REMOVE_FROM_FAVOURITE";
 export const GET_COMMENTS = "GET_COMMENTS";
+export const ADD_FRIEND = "ADD_FRIEND";
+export const REMOVE_FRIEND = "REMOVE_FRIEND";
 
 export const getProfileAction = () => {
   const url = "https://striveschool-api.herokuapp.com/api/profile/me";
@@ -165,3 +167,13 @@ export const getCommentsAction = url => {
     }
   };
 };
+
+export const addFriendAction = friend => ({
+  type: ADD_FRIEND,
+  payload: friend
+});
+
+export const removeFriendAction = friend => ({
+  type: REMOVE_FRIEND,
+  payload: friend
+});

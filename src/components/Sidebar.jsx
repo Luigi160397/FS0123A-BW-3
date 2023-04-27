@@ -5,7 +5,7 @@ import banner from "../assets/banner-small.png";
 import avatar1 from "../assets/avatar1.png";
 import collegati from "../assets/collegati.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfilesAction } from "../redux/actions";
+import { addFriendAction, getProfilesAction, removeFriendAction } from "../redux/actions";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -17,6 +17,10 @@ const Sidebar = () => {
   };
 
   const displayedProfiles = showMore ? profiles.slice(0, 10) : profiles.slice(0, 5);
+
+  const friends = useSelector(state => state.fav.friends);
+
+  console.log(friends);
 
   useEffect(() => {
     dispatch(getProfilesAction());
@@ -52,7 +56,7 @@ const Sidebar = () => {
                 className="me-3 rounded-circle"
                 src={profile.image ? profile.image : avatar1}
                 alt=""
-                style={{ width: "48px", height: "48px" }}
+                style={{ width: "48px", height: "48px", objectFit: "cover" }}
               />
 
               <div className="d-flex flex-column align-items-start">
@@ -66,14 +70,27 @@ const Sidebar = () => {
                 <span className="mb-2" style={{ fontSize: "14px" }}>
                   {profile.title}
                 </span>
-                <Button
-                  variant="outline-light"
-                  className="rounded-pill fw-bold d-flex align-items-center mb-4"
-                  style={{ fontSize: "16px" }}
-                >
-                  <img className="me-1" src={collegati} alt="collegati img" />
-                  Collegati
-                </Button>
+                {friends.length > 0 && friends.find(friend => friend._id === profile._id) ? (
+                  <Button
+                    variant="light"
+                    className="rounded-pill fw-bold d-flex align-items-center mb-4"
+                    style={{ fontSize: "16px" }}
+                    onClick={() => dispatch(removeFriendAction(profile))}
+                  >
+                    <img className="me-1" src={collegati} alt="collegati img" />
+                    Scollegati
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline-light"
+                    className="rounded-pill fw-bold d-flex align-items-center mb-4"
+                    style={{ fontSize: "16px" }}
+                    onClick={() => dispatch(addFriendAction(profile))}
+                  >
+                    <img className="me-1" src={collegati} alt="collegati img" />
+                    Collegati
+                  </Button>
+                )}
               </div>
             </div>
           ))}
