@@ -14,7 +14,7 @@ const favReducer = (state = initialState, action) => {
     case REMOVE_FROM_FAVOURITE:
       return {
         ...state,
-        favJobs: state.favJobs.filter(fav => fav !== action.payload)
+        favJobs: state.favJobs.filter(fav => fav._id !== action.payload._id)
       };
     default:
       return state;
