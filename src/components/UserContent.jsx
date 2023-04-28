@@ -1,9 +1,9 @@
 import RisorseCard from "./RisorseCard";
 import AnalisiCard from "./AnalisiCard";
 
-import Experiences from "./Experiences";
 import UserMainCard from "./UserMainCard";
 import BioCardUser from "./BioCardUser";
+import UserExperiences from "./UserExperiences";
 
 const UserContent = () => {
   return (
@@ -12,7 +12,7 @@ const UserContent = () => {
       <AnalisiCard />
       <RisorseCard />
       <BioCardUser />
-      <Experiences />
+      <UserExperiences />
     </div>
   );
 };
