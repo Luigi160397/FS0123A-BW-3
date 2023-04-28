@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import { getUserAction } from "../redux/actions";
+import { addFriendAction, getUserAction, removeFriendAction } from "../redux/actions";
 
 const UserMainCard = () => {
   const params = useParams();
@@ -13,6 +13,10 @@ const UserMainCard = () => {
   }, [params.id]);
 
   const profile = useSelector(state => state.profile.user);
+
+  const friends = useSelector(state => state.fav.friends);
+
+  console.log(friends);
 
   return (
     <>
@@ -45,13 +49,25 @@ const UserMainCard = () => {
               </Link>
             </Card.Text>
             <div className="d-flex pt-1 gap-2">
-              <Button style={{ backgroundColor: "#70b5f9" }} className="rounded-pill text-dark border-0">
-                Disponibile per
-              </Button>
-              <Button style={{ color: "#70b5f9", border: "1px solid #70b5f9" }} variant="outline-primary rounded-pill">
-                Aggiungi sezione del profilo
-              </Button>
-              <Button variant="outline-light rounded-pill">Altro</Button>
+              {friends.length > 0 && friends.find(friend => friend._id === profile._id) ? (
+                  <Button
+                    variant="light"
+                    className="rounded-pill fw-bold d-flex align-items-center"
+                    style={{ fontSize: "16px" }}
+                    onClick={() => dispatch(removeFriendAction(profile))}
+                  >
+                    Scollegati
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline-light"
+                    className="rounded-pill fw-bold d-flex align-items-center"
+                    style={{ fontSize: "16px" }}
+                    onClick={() => dispatch(addFriendAction(profile))}
+                  >
+                    Collegati
+                  </Button>
+                )}
             </div>
 
             <Card style={{ backgroundColor: "hsl(211.3deg 17.04% 26.47%)" }} className="mt-3">

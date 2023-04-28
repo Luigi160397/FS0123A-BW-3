@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Button, ButtonGroup, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsAction } from "../redux/actions";
@@ -9,11 +9,16 @@ import EditPost from "./EditPost";
 import moment from "moment";
 import "moment/locale/it";
 import CommentArea from "./CommentArea";
+import { Link } from "react-router-dom";
 
 const Post = () => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [showComment, setShowComment] = useState(false);
   const [postNumber, setPostNumber] = useState(20);
+
+  const [activeAll,setActiveAll] = useState(false);
+  const [activeFriend,setActiveFriend] = useState(false);
+
 
   const profile = useSelector(state => state.profile.content);
 
@@ -33,6 +38,24 @@ const Post = () => {
 
   return (
     <div id="posts" style={{ height: "1000px", overflow: "auto" }}>
+
+      <div className="d-flex justify-content-center mt-3"> 
+        <ButtonGroup aria-label="Basic example">
+          
+          <Button 
+          variant={activeAll ? "secondary" : "outline-secondary" }
+          onClick={()=> {setActiveAll(!activeAll); setActiveFriend(false)}}
+          >Tutti
+          </Button>
+
+          <Button 
+          variant={activeFriend ? "secondary" : "outline-secondary" }
+          onClick={()=> {setActiveFriend(!activeFriend); setActiveAll(false)}}
+          >
+          Amici</Button>
+        </ButtonGroup>
+      </div>
+
       {selectedPost && (
         <>
           <EditPost selectedPost={selectedPost} showEdit={showEdit} handleCloseEdit={handleCloseEdit} />
@@ -66,9 +89,9 @@ const Post = () => {
                 />
               </div>
               <div>
-                <Card.Text className="mb-0" style={{ fontSize: "14px" }}>
+                <Link to={`/user/${post.user._id}`} className="card-text text-decoration-none text-white mb-0" style={{ fontSize: "14px" }}>
                   {post.user.name} {post.user.surname}
-                </Card.Text>
+                </Link>
                 <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
                   {post.user.title}
                 </Card.Text>
