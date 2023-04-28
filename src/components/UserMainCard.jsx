@@ -10,7 +10,7 @@ const UserMainCard = () => {
   useEffect(() => {
     dispatch(getUserAction(params.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [params.id]);
 
   const profile = useSelector(state => state.profile.user);
 

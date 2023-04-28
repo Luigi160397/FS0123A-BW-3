@@ -1,8 +1,9 @@
 import RisorseCard from "./RisorseCard";
 import AnalisiCard from "./AnalisiCard";
-import BioCard from "./BioCard";
+
 import Experiences from "./Experiences";
 import UserMainCard from "./UserMainCard";
+import BioCardUser from "./BioCardUser";
 
 const UserContent = () => {
   return (
@@ -10,7 +11,7 @@ const UserContent = () => {
       <UserMainCard />
       <AnalisiCard />
       <RisorseCard />
-      <BioCard />
+      <BioCardUser />
       <Experiences />
     </div>
   );
