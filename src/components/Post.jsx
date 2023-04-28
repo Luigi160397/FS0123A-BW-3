@@ -16,8 +16,8 @@ const Post = () => {
   const [showComment, setShowComment] = useState(false);
   const [postNumber, setPostNumber] = useState(20);
 
-  const [activeAll,setActiveAll] = useState(true);
-  const [activeFriend,setActiveFriend] = useState(false);
+  const [activeAll, setActiveAll] = useState(true);
+  const [activeFriend, setActiveFriend] = useState(false);
 
   const friends = useSelector(state => state.fav.friends);
 
@@ -37,23 +37,35 @@ const Post = () => {
 
   const posts = useSelector(state => state.home.posts);
 
+  const friendPosts = posts.filter(post => {
+    return friends.some(friend => {
+      return friend._id === post.user._id;
+    });
+  });
+
   return (
     <div id="posts" style={{ height: "1000px", overflow: "auto" }}>
-
-      <div className="d-flex justify-content-center mt-3"> 
+      <div className="d-flex justify-content-center mt-3">
         <ButtonGroup aria-label="Basic example">
-          
-          <Button 
-          variant={activeAll ? "secondary" : "outline-secondary" }
-          onClick={()=> {setActiveAll(!activeAll); setActiveFriend(false)}}
-          >Tutti
+          <Button
+            variant={activeAll ? "secondary" : "outline-secondary"}
+            onClick={() => {
+              setActiveAll(!activeAll);
+              setActiveFriend(false);
+            }}
+          >
+            Tutti
           </Button>
 
-          <Button 
-          variant={activeFriend ? "secondary" : "outline-secondary" }
-          onClick={()=> {setActiveFriend(!activeFriend); setActiveAll(false)}}
+          <Button
+            variant={activeFriend ? "secondary" : "outline-secondary"}
+            onClick={() => {
+              setActiveFriend(!activeFriend);
+              setActiveAll(false);
+            }}
           >
-          Amici</Button>
+            Amici
+          </Button>
         </ButtonGroup>
       </div>
 
@@ -63,126 +75,136 @@ const Post = () => {
         </>
       )}
 
-      {activeAll && (posts.slice(0, postNumber).map(post => (
-        <Card className="bg-dark text-white mt-3 position-relative" key={post._id}>
-          {posts.length > 0 && post && post.user && (
-            <CardHeader className="d-flex gap-2">
-              {profile && post.user._id && post.user._id === profile._id && (
-                <Button
-                  style={{ right: "10px", top: "10px" }}
-                  variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
-                  onClick={() => {
-                    console.log("Post:" + post);
-                    setSelectedPost(post);
-                    handleShowEdit();
-                  }}
-                >
-                  <FaPen className="text-white fs-5" />
-                </Button>
-              )}
-              <div>
-                <img
-                  className="border border-dark border-2 rounded-circle"
-                  src={post.user.image ? post.user.image : avatar1}
-                  alt="avatar"
-                  width={48}
-                  height={48}
-                />
-              </div>
-              <div>
-                <Link to={`/user/${post.user._id}`} className="card-text text-decoration-none text-white mb-0" style={{ fontSize: "14px" }}>
-                  {post.user.name} {post.user.surname}
-                </Link>
-                <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
-                  {post.user.title}
-                </Card.Text>
-                <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
-                  {moment(post.createdAt).locale("IT").format("LL", "it")}
-                </Card.Text>
-              </div>
-            </CardHeader>
-          )}
-          <Card.Body>
-            <Card.Text>{post.text}</Card.Text>
-            {posts.length > 0 && post && post.image && (
-              <img src={post.image} width={"100%"} height={"300px"} alt="postImage" />
+      {activeAll &&
+        posts.slice(0, postNumber).map(post => (
+          <Card className="bg-dark text-white mt-3 position-relative" key={post._id}>
+            {posts.length > 0 && post && post.user && (
+              <CardHeader className="d-flex gap-2">
+                {profile && post.user._id && post.user._id === profile._id && (
+                  <Button
+                    style={{ right: "10px", top: "10px" }}
+                    variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
+                    onClick={() => {
+                      console.log("Post:" + post);
+                      setSelectedPost(post);
+                      handleShowEdit();
+                    }}
+                  >
+                    <FaPen className="text-white fs-5" />
+                  </Button>
+                )}
+                <div>
+                  <img
+                    className="border border-dark border-2 rounded-circle"
+                    src={post.user.image ? post.user.image : avatar1}
+                    alt="avatar"
+                    width={48}
+                    height={48}
+                  />
+                </div>
+                <div>
+                  <Link
+                    to={`/user/${post.user._id}`}
+                    className="card-text text-decoration-none text-white mb-0"
+                    style={{ fontSize: "14px" }}
+                  >
+                    {post.user.name} {post.user.surname}
+                  </Link>
+                  <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
+                    {post.user.title}
+                  </Card.Text>
+                  <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
+                    {moment(post.createdAt).locale("IT").format("LL", "it")}
+                  </Card.Text>
+                </div>
+              </CardHeader>
             )}
-            <div className="d-flex justify-content-end">
-              <Button
-                style={{ fontSize: "12px" }}
-                onClick={() => {
-                  setShowComment(showComment === post._id ? null : post._id);
-                }}
-                variant="outline-secondary border-0"
-                className="mt-2"
-              >
-                commenti
-              </Button>
-            </div>
-            {showComment === post._id && <CommentArea post={post} />}
-          </Card.Body>
-        </Card>
-      )))}
-      {activeFriend && (posts.slice(0, postNumber).map(post => (
-        <Card className="bg-dark text-white mt-3 position-relative" key={post._id}>
-          {posts.length > 0 && post && post.user && (
-            <CardHeader className="d-flex gap-2">
-              {profile && post.user._id && post.user._id === profile._id && (
-                <Button
-                  style={{ right: "10px", top: "10px" }}
-                  variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
-                  onClick={() => {
-                    console.log("Post:" + post);
-                    setSelectedPost(post);
-                    handleShowEdit();
-                  }}
-                >
-                  <FaPen className="text-white fs-5" />
-                </Button>
+            <Card.Body>
+              <Card.Text>{post.text}</Card.Text>
+              {posts.length > 0 && post && post.image && (
+                <img src={post.image} width={"100%"} height={"300px"} alt="postImage" />
               )}
-              <div>
-                <img
-                  className="border border-dark border-2 rounded-circle"
-                  src={post.user.image ? post.user.image : avatar1}
-                  alt="avatar"
-                  width={48}
-                  height={48}
-                />
+              <div className="d-flex justify-content-end">
+                <Button
+                  style={{ fontSize: "12px" }}
+                  onClick={() => {
+                    setShowComment(showComment === post._id ? null : post._id);
+                  }}
+                  variant="outline-secondary border-0"
+                  className="mt-2"
+                >
+                  commenti
+                </Button>
               </div>
-              <div>
-                <Link to={`/user/${post.user._id}`} className="card-text text-decoration-none text-white mb-0" style={{ fontSize: "14px" }}>
-                  {post.user.name} {post.user.surname}
-                </Link>
-                <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
-                  {post.user.title}
-                </Card.Text>
-                <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
-                  {moment(post.createdAt).locale("IT").format("LL", "it")}
-                </Card.Text>
-              </div>
-            </CardHeader>
-          )}
-          <Card.Body>
-            <Card.Text>{post.text}</Card.Text>
-            {posts.length > 0 && post && post.image && (
-              <img src={post.image} width={"100%"} height={"300px"} alt="postImage" />
+              {showComment === post._id && <CommentArea post={post} />}
+            </Card.Body>
+          </Card>
+        ))}
+      {activeFriend &&
+        friendPosts.slice(0, postNumber).map(post => (
+          <Card className="bg-dark text-white mt-3 position-relative" key={post._id}>
+            {posts.length > 0 && post && post.user && (
+              <CardHeader className="d-flex gap-2">
+                {profile && post.user._id && post.user._id === profile._id && (
+                  <Button
+                    style={{ right: "10px", top: "10px" }}
+                    variant="outline-secondary border-0 py-1 px-2 rounded-circle position-absolute"
+                    onClick={() => {
+                      console.log("Post:" + post);
+                      setSelectedPost(post);
+                      handleShowEdit();
+                    }}
+                  >
+                    <FaPen className="text-white fs-5" />
+                  </Button>
+                )}
+                <div>
+                  <img
+                    className="border border-dark border-2 rounded-circle"
+                    src={post.user.image ? post.user.image : avatar1}
+                    alt="avatar"
+                    width={48}
+                    height={48}
+                  />
+                </div>
+                <div>
+                  <Link
+                    to={`/user/${post.user._id}`}
+                    className="card-text text-decoration-none text-white mb-0"
+                    style={{ fontSize: "14px" }}
+                  >
+                    {post.user.name} {post.user.surname}
+                  </Link>
+                  <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
+                    {post.user.title}
+                  </Card.Text>
+                  <Card.Text className="text-muted mb-0" style={{ fontSize: "12px" }}>
+                    {moment(post.createdAt).locale("IT").format("LL", "it")}
+                  </Card.Text>
+                </div>
+              </CardHeader>
             )}
-            <div className="d-flex justify-content-end">
-              <Button
-                style={{ fontSize: "12px" }}
-                onClick={() => {
-                  setShowComment(showComment === post._id ? null : post._id);
-                }}
-                variant="outline-secondary border-0"
-                className="mt-2"
-              >
-                commenti
-              </Button>
-            </div>
-            {showComment === post._id && <CommentArea post={post} />}
-          </Card.Body>
-        </Card>
-      )))}
+            <Card.Body>
+              <Card.Text>{post.text}</Card.Text>
+              {posts.length > 0 && post && post.image && (
+                <img src={post.image} width={"100%"} height={"300px"} alt="postImage" />
+              )}
+              <div className="d-flex justify-content-end">
+                <Button
+                  style={{ fontSize: "12px" }}
+                  onClick={() => {
+                    setShowComment(showComment === post._id ? null : post._id);
+                  }}
+                  variant="outline-secondary border-0"
+                  className="mt-2"
+                >
+                  commenti
+                </Button>
+              </div>
+              {showComment === post._id && <CommentArea post={post} />}
+            </Card.Body>
+          </Card>
+        ))}
       <div className="d-flex justify-content-center mt-3">
         <Button className="w-100 text-white" variant="outline-secondary" onClick={() => setPostNumber(postNumber + 10)}>
           Visualizza altri post
