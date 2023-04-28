@@ -10,12 +10,14 @@ import avatar from "../assets/avatar.png";
 import { FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSearchQueryAction } from "../redux/actions";
 
 const MyNav = () => {
   const [query, setQuery] = useState("");
- 
+
+  const profile = useSelector(state => state.profile.content);
+
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -23,13 +25,13 @@ const MyNav = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const navigator=useNavigate();
+  const navigator = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    if(query !== ""){
+    if (query !== "") {
       dispatch(getSearchQueryAction(query));
-      navigator('/jobs');
+      navigator("/jobs");
       setQuery("");
     }
   };
@@ -48,7 +50,7 @@ const MyNav = () => {
               className="me-2 ps-5 pe-5 "
               aria-label="Search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={e => setQuery(e.target.value)}
             />
             <FaSearch style={{ left: "10px", top: "8px" }} className="position-absolute fs-5" />
           </Form>
@@ -87,7 +89,9 @@ const MyNav = () => {
           </Link>
           <Dropdown>
             <div className="d-flex flex-column justify-content-center align-items-center p-2">
-              <img className="rounded-circle" src={avatar} alt="avatar" width={30} height={30} />
+              {profile && profile.image && (
+                <img className="rounded-circle" src={profile.image} alt="avatar" width={30} height={30} />
+              )}
               <Dropdown.Toggle className="bg-transparent border-0 p-0" style={{ fontSize: "12px" }} id="dropdown-basic">
                 Tu
               </Dropdown.Toggle>
