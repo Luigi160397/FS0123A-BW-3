@@ -9,6 +9,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
 import Jobs from "./components/Jobs";
+import User from "./components/User";
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
       <BrowserRouter>
         <MyNav />
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/user/:id" element={<User />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route
             path="/experiences"

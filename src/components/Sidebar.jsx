@@ -6,6 +6,7 @@ import avatar1 from "../assets/avatar1.png";
 import collegati from "../assets/collegati.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { addFriendAction, getProfilesAction, removeFriendAction } from "../redux/actions";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -61,9 +62,13 @@ const Sidebar = () => {
 
               <div className="d-flex flex-column align-items-start">
                 <div>
-                  <span className="fw-bold" style={{ fontSize: "16px" }}>
+                  <Link
+                    to={`user/${profile._id}`}
+                    className="fw-bold text-decoration-none text-white"
+                    style={{ fontSize: "16px" }}
+                  >
                     {profile.name} {profile.surname}
-                  </span>
+                  </Link>
                   <span style={{ fontSize: "14px" }}> · 2°</span>
                 </div>
 
