@@ -9,6 +9,7 @@ export const REMOVE_FROM_FAVOURITE = "REMOVE_FROM_FAVOURITE";
 export const GET_COMMENTS = "GET_COMMENTS";
 export const ADD_FRIEND = "ADD_FRIEND";
 export const REMOVE_FRIEND = "REMOVE_FRIEND";
+export const GET_USER = "GET_USER";
 
 export const getProfileAction = () => {
   const url = "https://striveschool-api.herokuapp.com/api/profile/me";
@@ -177,3 +178,24 @@ export const removeFriendAction = friend => ({
   type: REMOVE_FRIEND,
   payload: friend
 });
+
+export const getUserAction = id => {
+  const url = `https://striveschool-api.herokuapp.com/api/profile/${id}`;
+  const token = process.env.REACT_APP_API_KEY;
+  return async dispatch => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: token
+        }
+      });
+      if (resp.ok) {
+        let data = await resp.json();
+
+        dispatch({ type: GET_USER, payload: data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

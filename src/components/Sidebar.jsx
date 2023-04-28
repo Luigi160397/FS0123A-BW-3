@@ -63,7 +63,7 @@ const Sidebar = () => {
               <div className="d-flex flex-column align-items-start">
                 <div>
                   <Link
-                    to={`user/${profile._id}`}
+                    to={`/user/${profile._id}`}
                     className="fw-bold text-decoration-none text-white"
                     style={{ fontSize: "16px" }}
                   >

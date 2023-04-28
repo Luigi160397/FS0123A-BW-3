@@ -1,9 +1,10 @@
-import { GET_EXPERIENCES, GET_PROFILE, GET_PROFILES } from "../actions";
+import { GET_EXPERIENCES, GET_PROFILE, GET_PROFILES, GET_USER } from "../actions";
 
 const initialState = {
   content: null,
   profiles: [],
-  experiencies:[]
+  experiencies: [],
+  user: null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -22,7 +23,12 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         experiencies: action.payload
-      }  
+      };
+    case GET_USER:
+      return {
+        ...state,
+        user: action.payload
+      };
     default:
       return state;
   }
