@@ -37,7 +37,7 @@ const MyNav = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" className="sticky-top">
       <Container className="px-5">
         <div className="d-flex align-items-center">
           <Link className="navbar-brand" to="/">

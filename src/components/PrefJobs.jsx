@@ -6,7 +6,7 @@ const PrefsJobs = () => {
   const favJobs = useSelector(state => state.fav.favJobs);
 
   return (
-    <Card className="mt-0 mb-2 bg-dark text-light">
+    <Card className="mt-0 mb-2 bg-dark text-light sticky-top" style={{ top: "90px" }}>
       <Card.Body className="d-flex flex-column">
         <Link
           to="/jobs"
